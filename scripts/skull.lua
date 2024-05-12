@@ -48,6 +48,7 @@ Skull = {
 			modelPart:setRot()
 		end
 		models.models.skull_figure.Avatar.Head.FaceParts.Complexion:setUVPixels()
+		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels()
 		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
 		local armorParts = {models.models.skull_figure.Avatar.Head.ArmorH, models.models.skull_figure.Avatar.UpperBody.Body.ArmorB, models.models.skull_figure.Avatar.UpperBody.Body.Tail.ArmorT, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.ArmorRA, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ArmorRAB, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.ArmorLA, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.ArmorLAB, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.ArmorRL, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ArmorRLB, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.ArmorLL, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom.ArmorLLB}
 		for i = 1, #armorParts do
@@ -110,6 +111,28 @@ Skull = {
 			models.models.skull_figure.Avatar.UpperBody.Body.CMaidAB.Skirt2:setPos(0, 0.625, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.CMaidAB.Skirt2.Skirt3:setPos(0, 0.625, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.CMaidAB.Skirt2.Skirt3.Skirt4:setPos(0, 1.25, 0)
+			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(4, 0)
+		elseif self.CurrentSkull == 4 then
+			setFigureCostumeTextureOffset(6)
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+				modelPart:remove()
+			end
+			models.models.skull_figure.Avatar.UpperBody.Body:addChild(General:copyModel(models.models.main.Avatar.UpperBody.Body.CMiniSkirtB, true))
+			models.models.skull_figure.Avatar.UpperBody.Body.CMiniSkirtB:setUVPixels(0, 14)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom:addChild(General:copyModel(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CCheerleaderRAB, true))
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:addChild(General:copyModel(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CCheerleaderLAB, true))
+			models.models.skull_figure.Avatar:setRot(0, -30, 0)
+			models.models.skull_figure.Avatar.Head:setRot(0, 25, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(151.9245, -11.0311, -19.7339)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(-37.5, -60, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:setRot(55, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(-20, -40, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg:setRot(25, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setRot(-75, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setPivot(-2, 6, -2)
+			models.models.skull_figure.Avatar.UpperBody.Body.CMiniSkirtB:setRot(5, 0, 0)
+			models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels(30, 6)
 			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(4, 0)
 		end
 
