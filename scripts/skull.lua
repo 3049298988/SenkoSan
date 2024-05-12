@@ -26,7 +26,7 @@ Skull = {
 
 		--頭ブロックのモデル生成の前処理
 		local currentCostume = Costume.CurrentCostume
-		Costume.resetCostume()
+		Costume.resetCostume(false)
 
 		--頭ブロックのモデルを生成する。
 		models.models.skull_figure.FigureDArms:setVisible(false)
@@ -133,7 +133,7 @@ Skull = {
 		elseif self.CurrentSkull == 5 then
 			models.models.skull_figure.FigureDArms:setVisible(true)
 			setFigureCostumeTextureOffset(10)
-			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.Head.HairAccessory, models.models.skull_figure.Avatar.Head.Cowlick, models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair, models.models.skull_figure.Avatar.UpperBody.Body.Bells, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.Head.Cowlick, models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair, models.models.skull_figure.Avatar.UpperBody.Body.Bells, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
 				modelPart:remove()
 			end
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CFoxHoodH, true))
@@ -182,7 +182,7 @@ Skull = {
 
 		--頭ブロックのモデル生成の後処理
 		if currentCostume ~= "DEFAULT" then
-			Costume.setCostume(currentCostume)
+			Costume.setCostume(currentCostume, false)
 		end
 	end,
 
