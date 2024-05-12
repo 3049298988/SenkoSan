@@ -22,6 +22,18 @@ FoxFire = {
         ---@type number
         instance.ModelScale = 0
 
+        ---狐火のちらつきアニメーションのカウンター
+        ---@type number
+        instance.FlickerCount = -1
+
+        ---次の狐火のちらつきまでのカウンター
+        ---@type integer
+        instance.NextFlickerCount = math.random(0, 4)
+
+        ---ちらつきによるモデルのスケールの倍率
+        ---@type number
+        instance.FlickerScale = 1
+
         ---狐火が点いているかどうか
         ---@type boolean
         instance.IsLit = true
@@ -33,17 +45,30 @@ FoxFire = {
         instance.onTick = function (self)
             local anchorMatrix = models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID]:partToWorldMatrix()
             self.FoxFireModel:setPos(vectors.vec3(anchorMatrix[4][1], anchorMatrix[4][2], anchorMatrix[4][3]):scale(16))
+            if self.NextFlickerCount == 0 then
+                self.FlickerCount = 0
+            end
             if self.IsFinal and self.ModelScale == 0 then
                 self.FoxFireModel:remove()
                 self.CanAbort = true
             end
+            self.NextFlickerCount = math.max(self.NextFlickerCount - 1, -1)
         end
 
         ---レンダーイベントで呼び出される関数
         instance.onRender = function (self)
             local fps = client:getFPS()
             self.ModelScale = self.IsLit and math.min(self.ModelScale + 8 / fps, 1) or math.max(self.ModelScale - 8 / fps, 0)
-            self.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(instance.ModelScale))
+            if self.FlickerCount >= 0 then
+                self.FlickerCount = math.min(self.FlickerCount + 8 / fps, 1)
+                self.FlickerScale = self.FlickerCount <= 0.5 and 1 - self.FlickerCount / 8 or (self.FlickerCount - 0.5) / 8 + 0.9375
+                if self.FlickerCount == 1 then
+                    self.NextFlickerCount = math.random(0, 4)
+                    self.FlickerCount = -1
+                end
+            end
+            self.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(self.ModelScale * self.FlickerScale))
+            self.FoxFireModel:setColor(self.FoxFireModel:getScale())
         end
 
         ---このインスタンスが破棄される場合に呼び出される関数
@@ -53,7 +78,8 @@ FoxFire = {
         end
 
         models.script_fox_fire_manager:addChild(instance.FoxFireModel)
-        instance.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(instance.ModelScale))
+        instance.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(instance.ModelScale * instance.FlickerScale))
+        instance.FoxFireModel:setColor(instance.FoxFireModel:getScale())
         instance.FoxFireModel:setVisible(true)
 
         return instance
