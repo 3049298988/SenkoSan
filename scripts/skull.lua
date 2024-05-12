@@ -33,10 +33,11 @@ Skull = {
 		Costume.resetCostume()
 
 		--頭ブロックのモデルを生成する。
+		models.models.skull_figure.FigureDArms:setVisible(false)
 		local copiedPart = General:copyModel(models.models.main.Avatar, false)
 		if copiedPart ~= nil then
 			models.models.skull_figure:addChild(copiedPart)
-			models.models.skull_figure.Avatar:setPos(0, 2.5, 0)
+			models.models.skull_figure.Avatar:setPos(0, 2.75, 0)
 		end
 		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightSpyglassPivot, models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftSpyglassPivot, models.models.skull_figure.Avatar.UpperBody.Body.ParrotPivots, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot}) do
 			modelPart:remove()
@@ -47,6 +48,7 @@ Skull = {
 		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
 			modelPart:setRot()
 		end
+		models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
 		models.models.skull_figure.Avatar.Head.FaceParts.Complexion:setUVPixels()
 		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels()
 		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
@@ -106,7 +108,6 @@ Skull = {
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(0, 30, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:setRot(40, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(44.0953, 22.521, 20.3606)
-			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
 			models.models.skull_figure.Avatar.UpperBody.Body.CMaidAB:setPos(0, 1.25, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.CMaidAB.Skirt2:setPos(0, 0.625, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.CMaidAB.Skirt2.Skirt3:setPos(0, 0.625, 0)
@@ -127,13 +128,31 @@ Skull = {
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(-37.5, -60, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:setRot(55, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(-20, -40, 0)
-			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
 			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg:setRot(25, 0, 0)
 			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setRot(-75, 0, 0)
 			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setPivot(-2, 6, -2)
 			models.models.skull_figure.Avatar.UpperBody.Body.CMiniSkirtB:setRot(5, 0, 0)
 			models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels(30, 6)
 			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(4, 0)
+		elseif self.CurrentSkull == 5 then
+			models.models.skull_figure.FigureDArms:setVisible(true)
+			setFigureCostumeTextureOffset(10)
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+				modelPart:remove()
+			end
+			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CFoxHoodH, true))
+			models.models.skull_figure.Avatar.Head.CFoxHoodH:setUVPixels()
+			models.models.skull_figure.Avatar:setPos(0, 1.75, -4)
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(40, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg:setRot(10, 0, 10)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom:setRot(-15, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom:setPivot(2, 6, -2)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg:setRot(15, 0, -10)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setRot(-15, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setPivot(2, 6, -2)
+			models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels(12, 0)
+			models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(12, 6)
+			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(8, 0)
 		end
 
 		--頭ブロックのモデル生成の後処理

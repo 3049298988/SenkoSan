@@ -340,6 +340,178 @@
 			},
 			"type": "cube",
 			"uuid": "381392c5-a728-0ade-c4c1-13d5c8864ce4"
+		},
+		{
+			"name": "RightArm",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [3.378, 9.19432, -0.77242],
+			"to": [6.378, 21.19433, 3.22758],
+			"autouv": 0,
+			"color": 5,
+			"inflate": 0.001,
+			"origin": [4, 21, 0],
+			"faces": {
+				"north": {
+					"uv": [44, 543, 47, 554],
+					"texture": 0
+				},
+				"east": {
+					"uv": [40, 543, 44, 554],
+					"texture": 0
+				},
+				"south": {
+					"uv": [47, 541, 50, 552],
+					"rotation": 180,
+					"texture": 0
+				},
+				"west": {
+					"uv": [47, 543, 51, 554],
+					"texture": 0
+				},
+				"up": {
+					"uv": [44, 539, 47, 543],
+					"texture": 0
+				},
+				"down": {
+					"uv": [47, 539, 50, 543],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "658047a4-4f13-b570-62bb-770bb88ca4a6"
+		},
+		{
+			"name": "LeftArm",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-6.2562, 9.22412, -0.77242],
+			"to": [-3.2562, 21.22412, 3.22758],
+			"autouv": 0,
+			"color": 5,
+			"inflate": 0.001,
+			"origin": [-8, 21, 0],
+			"faces": {
+				"north": {
+					"uv": [36, 575, 39, 586],
+					"texture": 0
+				},
+				"east": {
+					"uv": [32, 575, 36, 586],
+					"texture": 0
+				},
+				"south": {
+					"uv": [39, 573, 42, 584],
+					"rotation": 180,
+					"texture": 0
+				},
+				"west": {
+					"uv": [39, 575, 43, 586],
+					"texture": 0
+				},
+				"up": {
+					"uv": [36, 571, 39, 575],
+					"texture": 0
+				},
+				"down": {
+					"uv": [39, 571, 42, 575],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "3c0eee6d-fae6-e517-46a2-b417d1d7b745"
+		},
+		{
+			"name": "RightSleeve",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [3.378, 3.88688, -4.21662],
+			"to": [6.378, 9.88687, -0.21662],
+			"autouv": 0,
+			"color": 5,
+			"inflate": 0.002,
+			"rotation": [-70, 0, 0],
+			"origin": [4, 12, -2],
+			"faces": {
+				"north": {
+					"uv": [44, 549, 47, 555],
+					"texture": 0
+				},
+				"east": {
+					"uv": [40, 549, 44, 555],
+					"texture": 0
+				},
+				"south": {
+					"uv": [51, 549, 54, 555],
+					"texture": 0
+				},
+				"west": {
+					"uv": [47, 549, 51, 555],
+					"texture": 0
+				},
+				"up": {
+					"uv": [44, 539, 47, 543],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "42c98cd9-45b1-8326-ea9a-c2d3022ddcb9"
+		},
+		{
+			"name": "LeftSleeve",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-6.2562, 3.89705, -4.18862],
+			"to": [-3.2562, 9.89705, -0.18862],
+			"autouv": 0,
+			"color": 5,
+			"inflate": 0.002,
+			"rotation": [-70, 0, 0],
+			"origin": [-7, 12, -2],
+			"faces": {
+				"north": {
+					"uv": [36, 581, 39, 587],
+					"texture": 0
+				},
+				"east": {
+					"uv": [32, 581, 36, 587],
+					"texture": 0
+				},
+				"south": {
+					"uv": [43, 581, 46, 587],
+					"texture": 0
+				},
+				"west": {
+					"uv": [39, 581, 43, 587],
+					"texture": 0
+				},
+				"up": {
+					"uv": [36, 571, 39, 575],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "7c32f458-dbf7-35b3-ddac-8e6db0a01fa4"
 		}
 	],
 	"outliner": [
@@ -350,7 +522,7 @@
 			"uuid": "993a5344-f891-e2ae-a7fc-d68b3686dd1d",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -370,6 +542,48 @@
 					"children": ["01503b51-7b23-6372-da64-e93d40aeeab1", "8c9830e7-2b45-d2ac-5f95-f6ef14f27323", "381392c5-a728-0ade-c4c1-13d5c8864ce4"]
 				}
 			]
+		},
+		{
+			"name": "FigureDArms",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "a743e5cb-c435-d76f-11bc-8133abf630be",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				{
+					"name": "RightArm",
+					"origin": [5, 23, 0],
+					"rotation": [150.59158, -6.21271, -10.86815],
+					"color": 0,
+					"uuid": "48aa268d-b174-aa83-0300-eba43794dfe3",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": ["658047a4-4f13-b570-62bb-770bb88ca4a6", "42c98cd9-45b1-8326-ea9a-c2d3022ddcb9"]
+				},
+				{
+					"name": "LeftArm",
+					"origin": [-5, 23, 0],
+					"rotation": [150.85257, 7.43547, 13.06431],
+					"color": 0,
+					"uuid": "af94253b-4f4f-8ab4-29fd-fffa30e9449a",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": ["3c0eee6d-fae6-e517-46a2-b417d1d7b745", "7c32f458-dbf7-35b3-ddac-8e6db0a01fa4"]
+				}
+			]
 		}
 	],
 	"textures": [
@@ -379,7 +593,14 @@
 			"folder": "Model Textures",
 			"namespace": "",
 			"id": "3",
+			"width": 62,
+			"height": 971,
+			"uv_width": 62,
+			"uv_height": 971,
 			"particle": false,
+			"use_as_default": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "normal",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -387,7 +608,7 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "209a5f9f-2f9f-2443-33dd-4914eca009fb",
 			"relative_path": "../../textures/main.png",

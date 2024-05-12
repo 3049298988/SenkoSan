@@ -322,8 +322,14 @@
 			"parentType": "Skull",
 			"visible": false
 		},
-		"models.models.skull_figure_d.Skull": {
+		"models.models.skull_figure.FigureDArms": {
 			"visible": false
+		},
+		"models.models.skull_figure.FigureDArms.RightArm": {
+			"parentType": "None"
+		},
+		"models.models.skull_figure.FigureDArms.LeftArm": {
+			"parentType": "None"
 		},
 		"models.models.skull_figure_e.Skull": {
 			"visible": false
