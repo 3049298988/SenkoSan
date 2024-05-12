@@ -12,6 +12,10 @@ FoxFireManager = {
     ---@type boolean
     HasNightVision = false,
 
+    ---このワールドレンダーティックでレンダー処理をしたかどうか
+    ---@type boolean
+    IsRenderProcessed = false,
+
     ---狐火を有効化するかどうかを設定する。
     ---@param self FoxFireManager
     ---@param enabled boolean 狐火を有効化するかどうか
@@ -21,15 +25,32 @@ FoxFireManager = {
                 table.insert(self.FoxFireInstances, self.FoxFire.new(i))
             end
             events.TICK:register(function ()
-                for _, foxFireInstance in ipairs(self.FoxFireInstances) do
+                for index, foxFireInstance in ipairs(self.FoxFireInstances) do
                     foxFireInstance:onTick()
+                    if foxFireInstance.CanAbort then
+                        table.remove(self.FoxFireInstances, index)
+                        if #self.FoxFireInstances == 0 then
+                            events.TICK:remove("fox_fire_manager_tick")
+                            events.RENDER:remove("fox_fire_manager_render")
+                            events.WORLD_RENDER:remove("fox_fire_manager_world_render")
+                        end
+                    end
                 end
             end, "fox_fire_manager_tick")
+            events.RENDER:register(function (delta, ctx, matrix)
+                if not self.IsRenderProcessed then
+                    for _, foxFireInstance in ipairs(self.FoxFireInstances) do
+                        foxFireInstance:onRender()
+                    end
+                    self.IsRenderProcessed = true
+                end
+            end, "fox_fire_manager_render")
+            events.WORLD_RENDER:register(function ()
+                self.IsRenderProcessed = false
+            end, "fox_fire_manager_world_render")
         else
-            events.TICK:remove("fox_fire_manager_tick")
-            while #self.FoxFireInstances > 0 do
-                self.FoxFireInstances[1]:onDeinit()
-                table.remove(self.FoxFireInstances, 1)
+            for _, foxFireInstance in ipairs(self.FoxFireInstances) do
+                foxFireInstance:onDeinit()
             end
         end
     end,
