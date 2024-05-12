@@ -37,10 +37,10 @@ FoxFireManager = {
                     end
                 end
             end, "fox_fire_manager_tick")
-            events.RENDER:register(function (delta, ctx, matrix)
+            events.RENDER:register(function (delta)
                 if not self.IsRenderProcessed then
                     for _, foxFireInstance in ipairs(self.FoxFireInstances) do
-                        foxFireInstance:onRender()
+                        foxFireInstance:onRender(delta)
                     end
                     self.IsRenderProcessed = true
                 end

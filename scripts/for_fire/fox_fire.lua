@@ -20,7 +20,14 @@ FoxFire = {
 
         ---狐火の追尾目標座標
         ---@type Vector3
-        instance.TargetPos = vectors.vec3()
+        instance.TargetPos = General.getModelWorldPos(models.models.main.FoxFireAnchors["FoxFireAnchor"..instance.TargetAnchorID]):scale(16)
+
+        ---次のティックまでの狐火の追尾目標座標
+        ---@type Vector3
+        instance.NextTargetPos = instance.TargetPos
+
+        ---現在のティックでの狐火の位置
+        instance.CurrentPos = instance.TargetPos
 
         ---狐火のモデルのスケール。狐火の点火/消火時のアニメーションに利用する。
         ---@type number
@@ -55,8 +62,13 @@ FoxFire = {
 
         ---ティックイベントで呼び出される関数
         instance.onTick = function (self)
-            local anchorMatrix = models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID]:partToWorldMatrix()
-            self.TargetPos = vectors.vec3(anchorMatrix[4][1], anchorMatrix[4][2], anchorMatrix[4][3]):scale(16)
+            self.TargetPos = General.getModelWorldPos(models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID]):scale(16)
+            self.CurrentPos = self.FoxFireModel:getPos():sub(0, instance.FloatingOffset, 0)
+            self.NextTargetPos = self.CurrentPos:copy():add(self.TargetPos:copy():sub(self.CurrentPos):scale(0.2))
+            if self.TargetPos:copy():sub(self.CurrentPos):length() / 16 >= 16 then
+                self.NextTargetPos = self.TargetPos
+                self.CurrentPos = self.TargetPos
+            end
             if self.NextFlickerCount == 0 then
                 self.FlickerCount = 0
             end
@@ -68,7 +80,8 @@ FoxFire = {
         end
 
         ---レンダーイベントで呼び出される関数
-        instance.onRender = function (self)
+        ---@param delta number レンダーイベントのデルタ値
+        instance.onRender = function (self, delta)
             local fps = client:getFPS()
             self.ModelScale = self.IsLit and math.min(self.ModelScale + 8 / fps, 1) or math.max(self.ModelScale - 8 / fps, 0)
             if self.FlickerCount >= 0 then
@@ -82,7 +95,7 @@ FoxFire = {
             self.FloatingCount = self.FloatingCount + 0.25 / fps
             self.FloatingCount = self.FloatingCount > 1 and self.FloatingCount - 1 or self.FloatingCount
             self.FloatingOffset = math.sin(self.FloatingCount * 2 * math.pi) * 1
-            self.FoxFireModel:setPos(self.TargetPos:copy():add(0, self.FloatingOffset, 0))
+            self.FoxFireModel:setPos(self.CurrentPos:copy():add(self.NextTargetPos:copy():sub(self.CurrentPos):scale(delta)):add(0, self.FloatingOffset, 0))
             self.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(self.ModelScale * self.FlickerScale))
             self.FoxFireModel:setColor(self.FoxFireModel:getScale())
         end
@@ -94,6 +107,7 @@ FoxFire = {
         end
 
         models.script_fox_fire_manager:addChild(instance.FoxFireModel)
+        instance.FoxFireModel:setPos(instance.NextTargetPos)
         instance.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(instance.ModelScale * instance.FlickerScale))
         instance.FoxFireModel:setColor(instance.FoxFireModel:getScale())
         instance.FoxFireModel:setVisible(true)
