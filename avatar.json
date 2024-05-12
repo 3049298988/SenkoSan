@@ -322,9 +322,6 @@
 			"parentType": "Skull",
 			"visible": false
 		},
-		"models.models.skull_figure_b.Skull": {
-			"visible": false
-		},
 		"models.models.skull_figure_c.Skull": {
 			"visible": false
 		},
