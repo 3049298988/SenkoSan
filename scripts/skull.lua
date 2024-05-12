@@ -137,7 +137,7 @@ Skull = {
 		elseif self.CurrentSkull == 5 then
 			models.models.skull_figure.FigureDArms:setVisible(true)
 			setFigureCostumeTextureOffset(10)
-			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.Head.HairAccessory, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
 				modelPart:remove()
 			end
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CFoxHoodH, true))
@@ -153,6 +153,32 @@ Skull = {
 			models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels(12, 0)
 			models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(12, 6)
 			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(8, 0)
+		elseif self.CurrentSkull == 6 then
+			setFigureCostumeTextureOffset(16)
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.FaceParts.Mouth, models.models.skull_figure.Avatar.Head.HairAccessory, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve.RightSleeveRibbon, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve.LeftSleeveRibbon, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+				modelPart:remove()
+			end
+			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CKimonoH, true))
+			models.models.skull_figure.Avatar.UpperBody.Body:addChild(General:copyModel(models.models.main.Avatar.UpperBody.Body.UmbrellaB, true))
+			models.models.skull_figure.Avatar:setPos(0, 1.75, -4)
+			models.models.skull_figure.Avatar:setRot(0, 15, 0)
+			models.models.skull_figure.Avatar.Head:setRot(0, -15, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(39.13, 57.07, 7.78)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom:setRot(50, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase:setRot(7.5, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve:setRot()
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve:setPivot(5.5, 19, 4)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(12.5, -47.5, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:setRot(50, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase:setRot(20, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve:setRot(8, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve:setPivot(-5.5, 19, 4)
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(40, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg:setRot(0, 15, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg:setRot(-5, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.UmbrellaB:setUVPixels(0, 27)
+			models.models.skull_figure.Avatar.UpperBody.Body.UmbrellaB:setPos(1.25, -2.5, -1)
+			models.models.skull_figure.Avatar.UpperBody.Body.UmbrellaB:setRot(35.58, 12.7, -38.26)
 		end
 
 		--頭ブロックのモデル生成の後処理

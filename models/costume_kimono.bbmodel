@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"format_version": "4.5",
+		"format_version": "4.10",
 		"model_format": "free",
 		"box_uv": false
 	},
@@ -16,49 +16,6 @@
 		"height": 3
 	},
 	"elements": [
-		{
-			"name": "HairAccessory",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 24, -4],
-			"to": [4, 32, 4],
-			"autouv": 0,
-			"color": 0,
-			"visibility": false,
-			"inflate": 0.55,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [4.25, 0.75, 8.5, 1.5],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 0.75, 4.25, 1.5],
-					"texture": 0
-				},
-				"south": {
-					"uv": [12.75, 0.75, 17, 1.5],
-					"texture": 0
-				},
-				"west": {
-					"uv": [8.5, 0.75, 12.75, 1.5],
-					"texture": 0
-				},
-				"up": {
-					"uv": [4.25, 0, 8.5, 0.75],
-					"texture": 0
-				},
-				"down": {
-					"uv": [8.5, 0, 12.75, 0.75],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "42d276cf-d6b2-2cf9-5dd0-ea5e6126f33a"
-		},
 		{
 			"name": "Wisteria1",
 			"box_uv": false,
@@ -896,12 +853,11 @@
 			"uuid": "e67336b8-fc7d-84de-f4dc-36ffa4c5d3f3",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
 			"children": [
-				"42d276cf-d6b2-2cf9-5dd0-ea5e6126f33a",
 				{
 					"name": "Wisteria",
 					"origin": [0, 24, 0],
@@ -909,7 +865,7 @@
 					"uuid": "bc0398f3-6d75-5c23-dc0d-146b0e3775db",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -927,7 +883,7 @@
 					"uuid": "db4a3eef-726c-defd-a7c7-9f9b57e32e92",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -946,7 +902,7 @@
 					"uuid": "3a2066ff-2f47-05ed-e062-ef3fb0b6a738",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -988,7 +944,14 @@
 			"folder": "",
 			"namespace": "",
 			"id": "1",
+			"width": 17,
+			"height": 3,
+			"uv_width": 17,
+			"uv_height": 3,
 			"particle": false,
+			"use_as_default": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -996,10 +959,10 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "ed09f945-54ac-b6ec-375c-7d307a2c5cfd",
-			"relative_path": "../../textures/costume_kimono.png",
+			"relative_path": "../textures/costume_kimono.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAADCAYAAAB1c+RqAAAAAXNSR0IArs4c6QAAAFVJREFUGFdj3FHx9r+UHifDs0vfGZBpMU0OhlfXf4DFDcIF4WzbBE4GdMB4adm3/+gGwPjYDBJR/Qg2g5+XH24W45//3/6zMHIxYhiPQ+DrjW//0aUAxVo0SkMhu3cAAAAASUVORK5CYII="
 		}
 	]

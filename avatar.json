@@ -330,9 +330,6 @@
 		},
 		"models.models.skull_figure.FigureDArms.LeftArm": {
 			"parentType": "None"
-		},
-		"models.models.skull_figure_e.Skull": {
-			"visible": false
 		}
 	}
 }
