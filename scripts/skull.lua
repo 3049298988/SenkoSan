@@ -202,11 +202,9 @@ Skull = {
 			modelPart:remove()
 		end
 
-		models.script_skull:setVisible(false)
-
-		models.models.skull_figure:setScale(0.4, 0.4, 0.4)
-
 		events.ENTITY_INIT:register(function ()
+			models.models.skull_figure:setScale(0.4, 0.4, 0.4)
+
 			local loadedData = Config.loadConfig("skull", 1)
 			if loadedData <= #self.SkullList then
 				self.CurrentSkull = loadedData
