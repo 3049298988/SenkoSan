@@ -41,17 +41,17 @@ Skull = {
 		if models.models.skull_figure.Avatar.Head.Ears == nil then
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.Ears, true))
 		end
-		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.RightLine, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.LeftLine, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
+		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.RightLine, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.LeftLine, models.models.skull_figure.Avatar.Head, models.models.skull_figure.Avatar.UpperBody, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
 			modelPart:setRot()
 		end
 		models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
 		models.models.skull_figure.Avatar.Head.FaceParts.Complexion:setUVPixels()
 		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels()
 		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
-		local armorParts = {models.models.skull_figure.Avatar.Head.ArmorH, models.models.skull_figure.Avatar.UpperBody.Body.ArmorB, models.models.skull_figure.Avatar.UpperBody.Body.Tail.ArmorT, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.ArmorRA, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ArmorRAB, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.ArmorLA, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.ArmorLAB, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.ArmorRL, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ArmorRLB, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.ArmorLL, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom.ArmorLLB}
-		for i = 1, #armorParts do
-			if armorParts[i] ~= nil then
-				armorParts[i]:remove()
+		local removeParts = {models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightNaginata, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftNaginata, models.models.skull_figure.Avatar.UpperBody.Body.UmbrellaB, models.models.skull_figure.Avatar.Head.ArmorH, models.models.skull_figure.Avatar.UpperBody.Body.ArmorB, models.models.skull_figure.Avatar.UpperBody.Body.Tail.ArmorT, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.ArmorRA, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ArmorRAB, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.ArmorLA, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.ArmorLAB, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.ArmorRL, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ArmorRLB, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.ArmorLL, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom.ArmorLLB}
+		for i = 1, 14 do
+			if removeParts[i] ~= nil then
+				removeParts[i]:remove()
 			end
 		end
 
