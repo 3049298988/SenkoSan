@@ -17,10 +17,6 @@ Skull = {
 	---@type integer
 	CurrentSkull = 1,
 
-	---強制的に頭ブロックを生成するまでのカウンター。これが発火するのはアバタープレイヤーがオフラインの時のみ。
-    ---@type integer
-    ForceGenerateCount = 2,
-
 	---フィギュアの頭ブロックモデルを生成する。
 	generateSkullFigureModel = function (self)
 		--既存の頭ブロックのモデルを生成する。
