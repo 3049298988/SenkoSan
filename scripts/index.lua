@@ -1,6 +1,5 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
-	General = require("scripts.general")
 	Config = require("scripts.config")
 	Language = require("scripts.language")
 	KeyManager = require("scripts.key_manager")
@@ -38,3 +37,7 @@ events.ENTITY_INIT:register(function ()
 	Sleep = require("scripts.sleep")
 	require("scripts.afk")
 end)
+
+--ENTITY_INITを待たず読み込むクラス
+General = require("scripts.general")
+Skull = require("scripts.skull")

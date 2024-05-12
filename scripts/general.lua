@@ -1,32 +1,25 @@
----@alias ConditionLevel
----| "LOW"
----| "MEDIUM"
----| "HIGH"
-
---[[
-	## General.playerConditionの値
-	- 凍えている時は常に"LOW"
-	- クリエイティブモードとスペクテイターモードでは常に"HIGH"
-	┌───────────┬───────────────────┬───────────────┐
-	│ 値		│ 体力H				| 満腹度S		 |
-	╞═══════════╪═══════════════════╪═══════════════╡
-	│ "HIGH"	│ 50% < H			│ 30% < S		│
-	├───────────┼───────────────────┼───────────────┤
-	│ "MEDIUM"	│ 20% < H <= 50%	│ 0% < S <= 30%	│
-	├───────────┼───────────────────┼───────────────┤
-	│ "LOW"		│ H <= 50%			│ 0% = S		│
-	└───────────┴───────────────────┴───────────────┘
-]]
+---プレイヤーの体力・満腹度の度合いを示す列挙型
+---@alias General.ConditionLevel
+---| "LOW" ハート2個以下、又は満腹度が0、又は凍えているとき
+---| "MEDIUM" ハートが2個より多いかつ50%以下、又は満腹度が30%以下
+---| "HIGH" ハートが50%より多いかつ満腹度が30%より多い、又はクリエイティブモードかスペクテイターモード
 
 ---@class General 他の複数のクラスが参照するフィールドや関数を定義するクラス
----@field EffectChecked boolean このチックにステータスエフェクトを取得したかどうか
----@field EffectTable table<string, HostAPI.statusEffect> ステータスエフェクトを保持する変数
----@field PlayerCondition ConditionLevel プレイヤーの体力・満腹度の度合い
----@field ShowMessage boolean 頻出メッセージを表示するかどうか
 General = {
+	---このチックにステータスエフェクトを取得したかどうか
+	---@type boolean
 	EffectChecked = false,
+
+	---ステータスエフェクトを保持する変数
+	---@type table<string, HostAPI.statusEffect>
 	EffectTable = {},
+
+	---プレイヤーの体力・満腹度の度合い
+	---@type General.ConditionLevel
 	PlayerCondition = "HIGH",
+
+	---メッセージを表示するかどうか
+	---@type boolean
 	ShowMessage = true,
 
 	---クラスのインスタンス化
@@ -54,17 +47,42 @@ General = {
 			General.EffectChecked = true
 		end
 		return General.EffectTable[name]
+	end,
+
+	    ---モデルパーツをディープコピーする。非表示のモデルパーツはコピーしない。
+    ---@param modelPart ModelPart コピーするモデルパーツ
+	---@param copyInvisibleParts boolean 非表示のモデルパーツをコピーするかどうか
+    ---@return ModelPart? copiedModelPart コピーされたモデルパーツ。入力されたモデルパーツが非表示の場合はnilが返る。
+    copyModel = function (self, modelPart, copyInvisibleParts)
+        if modelPart:getVisible() or copyInvisibleParts then
+            local copy = modelPart:copy(modelPart:getName())
+            copy:setParentType("None")
+			copy:setVisible(true)
+            for _, child in ipairs(copy:getChildren()) do
+                copy:removeChild(child)
+                local childModel = self:copyModel(child, copyInvisibleParts)
+                if childModel ~= nil then
+                    copy:addChild(childModel)
+                end
+            end
+            return copy
+        end
+    end,
+
+	---初期化関数
+	init = function ()
+		events.TICK:register(function ()
+			local gamemode = player:getGamemode()
+			local healthPercent = player:getHealth() / player:getMaxHealth()
+			local satisfactionPercent = player:getFood() / 20
+			General.PlayerCondition = player:getFrozenTicks() == 140 and "LOW" or (((healthPercent > 0.5 and satisfactionPercent > 0.3) or (gamemode == "CREATIVE" or gamemode == "SPECTATOR")) and "HIGH" or ((healthPercent > 0.2 and satisfactionPercent > 0) and "MEDIUM" or "LOW"))
+			if not client:isPaused() then
+				General.EffectChecked = false
+			end
+		end)
 	end
 }
 
-events.TICK:register(function ()
-	local gamemode = player:getGamemode()
-	local healthPercent = player:getHealth() / player:getMaxHealth()
-	local satisfactionPercent = player:getFood() / 20
-	General.PlayerCondition = player:getFrozenTicks() == 140 and "LOW" or (((healthPercent > 0.5 and satisfactionPercent > 0.3) or (gamemode == "CREATIVE" or gamemode == "SPECTATOR")) and "HIGH" or ((healthPercent > 0.2 and satisfactionPercent > 0) and "MEDIUM" or "LOW"))
-	if not client:isPaused() then
-		General.EffectChecked = false
-	end
-end)
+General:init()
 
 return General
