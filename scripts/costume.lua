@@ -455,11 +455,8 @@ if loadedData <= #Costume.CostumeList then
 	Costume.CurrentCostume = Costume.CostumeList[loadedData]:upper()
 	if Costume.CurrentCostume ~= "DEFAULT" then
 		Costume.setCostume(Costume.CurrentCostume)
-	else
-		Costume.resetCostume()
 	end
 else
-	Costume.resetCostume()
 	Config.saveConfig("costume", 1)
 end
 
