@@ -18,6 +18,10 @@ FoxFire = {
         ---@type boolean
         instance.CanAbort = false
 
+        ---狐火の追尾目標座標
+        ---@type Vector3
+        instance.TargetPos = vectors.vec3()
+
         ---狐火のモデルのスケール。狐火の点火/消火時のアニメーションに利用する。
         ---@type number
         instance.ModelScale = 0
@@ -34,6 +38,14 @@ FoxFire = {
         ---@type number
         instance.FlickerScale = 1
 
+        ---狐火の浮遊アニメーションのカウンター
+        ---@type number
+        instance.FloatingCount = math.random()
+
+        ---狐火の浮遊アニメーションのy軸オフセット
+        ---@type number
+        instance.FloatingOffset = 0
+
         ---狐火が点いているかどうか
         ---@type boolean
         instance.IsLit = true
@@ -44,7 +56,7 @@ FoxFire = {
         ---ティックイベントで呼び出される関数
         instance.onTick = function (self)
             local anchorMatrix = models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID]:partToWorldMatrix()
-            self.FoxFireModel:setPos(vectors.vec3(anchorMatrix[4][1], anchorMatrix[4][2], anchorMatrix[4][3]):scale(16))
+            self.TargetPos = vectors.vec3(anchorMatrix[4][1], anchorMatrix[4][2], anchorMatrix[4][3]):scale(16)
             if self.NextFlickerCount == 0 then
                 self.FlickerCount = 0
             end
@@ -67,6 +79,10 @@ FoxFire = {
                     self.FlickerCount = -1
                 end
             end
+            self.FloatingCount = self.FloatingCount + 0.25 / fps
+            self.FloatingCount = self.FloatingCount > 1 and self.FloatingCount - 1 or self.FloatingCount
+            self.FloatingOffset = math.sin(self.FloatingCount * 2 * math.pi) * 1
+            self.FoxFireModel:setPos(self.TargetPos:copy():add(0, self.FloatingOffset, 0))
             self.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(self.ModelScale * self.FlickerScale))
             self.FoxFireModel:setColor(self.FoxFireModel:getScale())
         end
