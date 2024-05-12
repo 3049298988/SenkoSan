@@ -1,6 +1,5 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
-	General = require("scripts.general")
 	Config = require("scripts.config")
 	Language = require("scripts.language")
 	KeyManager = require("scripts.key_manager")
@@ -25,7 +24,6 @@ events.ENTITY_INIT:register(function ()
 	Naginata = require("scripts.naginata")
 	Umbrella = require("scripts.umbrella")
 	Armor = require("scripts.armor")
-	Skull = require("scripts.skull")
 	Nameplate = require("scripts.nameplate")
 
 	--機能別クラス
@@ -64,3 +62,7 @@ events.ENTITY_INIT:register(function ()
 	Afk = require("scripts.afk")
 	Christmas = require("scripts.christmas")
 end)
+
+--ENTITY_INITを待たず読み込むクラス
+General = require("scripts.general")
+Skull = require("scripts.skull")

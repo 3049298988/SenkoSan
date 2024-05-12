@@ -1,24 +1,52 @@
+---頭ブロックのタイプ
+---@alias Skull.SKullType
+---| "DEFAULT" バニラの頭ブロック風
+---| "FIGURE_A" フィギュア（いつもの服）
+---| "FIGURE_B" フィギュア（メイド服）
+---| "FIGURE_C" フィギュア（チアリーダー）
+---| "FIGURE_D" フィギュア（きつねパーカー）
+---| "FIGURE_E" フィギュア（着物）
+
 ---@class Skull プレイヤーの頭のモデルタイプを管理するクラス
----@field SkullList table<string> 利用可能な頭モデルのリスト
----@field CurrentSkull integer 現在の頭モデルのID
 Skull = {
+	---利用可能な頭モデルのリスト
+	---@type string[]
 	SkullList = {"default", "figure_a", "figure_b", "figure_c", "figure_d", "figure_e"},
-	CurrentSkull = 1
+
+	---現在の頭モデルのID
+	---@type integer
+	CurrentSkull = 1,
+
+	---強制的に頭ブロックを生成するまでのカウンター。これが発火するのはアバタープレイヤーがオフラインの時のみ。
+    ---@type integer
+    ForceGenerateCount = 2,
+
+	---初期化関数
+	init = function (self)
+		---デフォルトの頭ブロックを生成
+		---@diagnostic disable-next-line: discard-returns
+        models:newPart("script_skull", "Skull")
+		models.script_skull:setPos(0, -24, 0)
+		local copiedPart = General:copyModel(models.models.main.Avatar.Head)
+		if copiedPart ~= nil then
+			models.script_skull:addChild(copiedPart)
+		end
+		models.script_skull.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
+		for _, modelPart in ipairs({models.script_skull.Head.FaceParts.Eyes.RightEye.RightSpyglassPivot, models.script_skull.Head.FaceParts.Eyes.LeftEye.LeftSpyglassPivot}) do
+			modelPart:remove()
+		end
+
+		events.ENTITY_INIT:register(function ()
+			local loadedData = Config.loadConfig("skull", 1)
+			if loadedData <= #self.SkullList then
+				self.CurrentSkull = loadedData
+			else
+				Config.saveConfig("skull", 1)
+			end
+		end)
+	end
 }
 
----@diagnostic disable-next-line: redundant-parameter
-events.SKULL_RENDER:register(function (delta, _, _, _, renderType)
-	models.models.skull.Skull:setVisible(renderType == "HEAD" or Skull.CurrentSkull == 1)
-	for index, modelPart in ipairs({models.models.skull_figure_a.Skull, models.models.skull_figure_b.Skull, models.models.skull_figure_c.Skull, models.models.skull_figure_d.Skull, models.models.skull_figure_e.Skull}) do
-		modelPart:setVisible(renderType ~= "HEAD" and Skull.CurrentSkull == index + 1)
-	end
-end)
-
-local loadedData = Config.loadConfig("skull", 1)
-if loadedData <= #Skull.SkullList then
-	Skull.CurrentSkull = loadedData
-else
-	Config.saveConfig("skull", 1)
-end
+Skull:init()
 
 return Skull
