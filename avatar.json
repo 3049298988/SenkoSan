@@ -310,20 +310,18 @@
 		"models.models.fox_fire": {
 			"primaryRenderType": "EMISSIVE_SOLID"
 		},
-		"models.models.skull_figure_a.Skull": {
+		"models.models.skull_figure": {
+			"parentType": "Skull",
 			"visible": false
 		},
-		"models.models.skull_figure_b.Skull": {
+		"models.models.skull_figure.FigureDArms": {
 			"visible": false
 		},
-		"models.models.skull_figure_c.Skull": {
-			"visible": false
+		"models.models.skull_figure.FigureDArms.RightArm": {
+			"parentType": "None"
 		},
-		"models.models.skull_figure_d.Skull": {
-			"visible": false
-		},
-		"models.models.skull_figure_e.Skull": {
-			"visible": false
+		"models.models.skull_figure.FigureDArms.LeftArm": {
+			"parentType": "None"
 		}
 	}
 }

@@ -211,6 +211,9 @@ end
 function pings.main4_action3(skullID)
 	Skull.CurrentSkull = skullID
 	ActionWheel.CurrentSkullState = skullID
+	if Skull.CurrentSkull > 1 then
+		Skull:generateSkullFigureModel()
+	end
 	if host:isHost() then
 		ActionWheel.setSkullChangeActionTitle()
 	end
