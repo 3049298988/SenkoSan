@@ -26,7 +26,7 @@ Skull = {
 
 		--頭ブロックのモデル生成の前処理
 		local currentCostume = Costume.CurrentCostume
-		Costume.resetCostume()
+		Costume.resetCostume(false)
 
 		--頭ブロックのモデルを生成する。
 		models.models.skull_figure.FigureDArms:setVisible(false)
@@ -185,7 +185,7 @@ Skull = {
 
 		--頭ブロックのモデル生成の後処理
 		if currentCostume ~= "DEFAULT" then
-			Costume.setCostume(currentCostume)
+			Costume.setCostume(currentCostume, false)
 		end
 	end,
 

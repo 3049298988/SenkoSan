@@ -137,8 +137,9 @@ Costume = {
 
 	---コスチュームを設定する。
 	---@param costume CostumeType 設定するコスチューム
-	setCostume = function (costume)
-		Costume.resetCostume()
+	---@param regenerateModels boolean ポートレートモデルを再生成するかどうか
+	setCostume = function (costume, regenerateModels)
+		Costume.resetCostume(false)
 		Costume.CurrentCostume = costume
 		if costume == "NIGHTWEAR" then
 			Costume.setCostumeTextureOffset(1)
@@ -257,12 +258,15 @@ Costume = {
 			events.TICK:register(Costume.CostumeEvents.MiniskirtTick, "costume_miniskirt_tick")
 			events.RENDER:register(Costume.CostumeEvents.HalloweenRender, "costume_halloween_render")
 			Apron.disable()
-
+		end
+		if regenerateModels then
+			Portrait:generatePortraitModel()
 		end
 	end,
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
-	resetCostume = function ()
+	---@param regenerateModels boolean ポートレートモデルを再生成するかどうか
+	resetCostume = function (regenerateModels)
 		for _, modelPart in ipairs({models.models.main.Avatar.Head, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
 			modelPart:setVisible(true)
 		end
@@ -283,6 +287,9 @@ Costume = {
 		Costume.setCostumeTextureOffset(0)
 		Sleeve.enable()
 		Apron.enable()
+		if regenerateModels then
+			Portrait:generatePortraitModel()
+		end
 		Legs.ReducedLegSwing = false
 		Ears.EnableJerkEar = true
 		Costume.CurrentCostume = "DEFAULT"
@@ -393,9 +400,12 @@ local loadedData = Config.loadConfig("costume", 1)
 if loadedData <= #Costume.CostumeList then
 	Costume.CurrentCostume = string.upper(Costume.CostumeList[loadedData])
 	if Costume.CurrentCostume ~= "DEFAULT" then
-		Costume.setCostume(Costume.CurrentCostume)
+		Costume.setCostume(Costume.CurrentCostume, true)
+	else
+		Portrait:generatePortraitModel()
 	end
 else
+	Portrait:generatePortraitModel()
 	Config.saveConfig("costume", 1)
 end
 
