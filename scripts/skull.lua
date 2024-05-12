@@ -26,7 +26,7 @@ Skull = {
 
 		--頭ブロックのモデル生成の前処理
 		local currentCostume = Costume.CurrentCostume
-		Costume.resetCostume()
+		Costume.resetCostume(false)
 
 		--頭ブロックのモデルを生成する。
 		models.models.skull_figure.FigureDArms:setVisible(false)
@@ -41,7 +41,7 @@ Skull = {
 		if models.models.skull_figure.Avatar.Head.Ears == nil then
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.Ears, true))
 		end
-		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
+		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.RightLine, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.LeftLine, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
 			modelPart:setRot()
 		end
 		models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
@@ -179,7 +179,7 @@ Skull = {
 
 		--頭ブロックのモデル生成の後処理
 		if currentCostume ~= "DEFAULT" then
-			Costume.setCostume(currentCostume)
+			Costume.setCostume(currentCostume, false)
 		end
 	end,
 

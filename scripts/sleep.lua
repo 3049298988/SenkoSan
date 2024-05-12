@@ -44,7 +44,7 @@ events.TICK:register(function()
 		if not Sleep.IsSleepingPrev  then
 			animations["models.main"]["afraid"]:stop()
 			Sleep.CostumeBeforeSleeping = Costume.CurrentCostume
-			Costume.setCostume("NIGHTWEAR")
+			Costume.setCostume("NIGHTWEAR", true)
 			if not Warden.WardenNearby then
 				if host:isHost() and sleepState >= 1 and sleepState <= 2 and General.ShowMessage then
 					print(Language.getTranslate("message__sleep_together"))
@@ -150,9 +150,9 @@ events.TICK:register(function()
 			end
 			models.models.dummy_player:setVisible(false)
 			if Sleep.CostumeBeforeSleeping == "DEFAULT" then
-				Costume.resetCostume()
+				Costume.resetCostume(true)
 			else
-				Costume.setCostume(Sleep.CostumeBeforeSleeping)
+				Costume.setCostume(Sleep.CostumeBeforeSleeping, true)
 			end
 			Sleeve.Moving = true
 			models.models.main:setVisible(true)

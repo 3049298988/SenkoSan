@@ -25,6 +25,7 @@ events.ENTITY_INIT:register(function ()
 	Umbrella = require("scripts.umbrella")
 	Armor = require("scripts.armor")
 	Nameplate = require("scripts.nameplate")
+	Portrait = require("scripts.portrait")
 
 	--機能別クラス
 	Costume = require("scripts.costume")

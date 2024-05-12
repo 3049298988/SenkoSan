@@ -190,10 +190,10 @@ end
 
 function pings.main4_action1(costumeID)
 	if costumeID == 1 then
-		Costume.resetCostume()
+		Costume.resetCostume(true)
 	else
 		---@diagnostic disable-next-line: undefined-field
-		Costume.setCostume(Costume.CostumeList[costumeID]:upper())
+		Costume.setCostume(Costume.CostumeList[costumeID]:upper(), true)
 	end
 	ActionWheel.CurrentCostumeState = costumeID
 	if host:isHost() then

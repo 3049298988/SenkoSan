@@ -144,8 +144,9 @@ Costume = {
 
 	---コスチュームを設定する。
 	---@param costume CostumeType 設定するコスチューム
-	setCostume = function (costume)
-		Costume.resetCostume()
+	---@param regenerateModels boolean ポートレートモデルを再生成するかどうか
+	setCostume = function (costume, regenerateModels)
+		Costume.resetCostume(false)
 		Costume.CurrentCostume = costume
 		if costume == "NIGHTWEAR" then
 			for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve.RightSleeveRibbon, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve.LeftSleeveRibbon}) do
@@ -324,12 +325,15 @@ Costume = {
 			events.TICK:register(Costume.CostumeEvents.MiniskirtTick, "costume_miniskirt_tick")
 			events.RENDER:register(Costume.CostumeEvents.HalloweenRender, "costume_halloween_render")
 			Apron.disable()
-
+		end
+		if regenerateModels then
+			Portrait:generatePortraitModel()
 		end
 	end,
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
-	resetCostume = function ()
+	---@param regenerateModels boolean ポートレートモデルを再生成するかどうか
+	resetCostume = function (regenerateModels)
 		for _, modelPart in ipairs({models.models.main.Avatar.Head, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve.RightSleeveRibbon, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve.LeftSleeveRibbon}) do
 			modelPart:setVisible(true)
 		end
@@ -351,6 +355,9 @@ Costume = {
 		HairAccessory.visible(true)
 		Sleeve.enable()
 		Apron.enable()
+		if regenerateModels then
+			Portrait:generatePortraitModel()
+		end
 		Legs.ReducedLegSwing = false
 		Ears.EnableJerkEar = true
 		Costume.CurrentCostume = "DEFAULT"
@@ -465,9 +472,12 @@ if loadedData <= #Costume.CostumeList then
 	---@diagnostic disable-next-line: undefined-field
 	Costume.CurrentCostume = Costume.CostumeList[loadedData]:upper()
 	if Costume.CurrentCostume ~= "DEFAULT" then
-		Costume.setCostume(Costume.CurrentCostume)
+		Costume.setCostume(Costume.CurrentCostume, true)
+	else
+		Portrait:generatePortraitModel()
 	end
 else
+	Portrait:generatePortraitModel()
 	Config.saveConfig("costume", 1)
 end
 
