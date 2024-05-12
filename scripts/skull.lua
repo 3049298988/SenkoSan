@@ -45,7 +45,10 @@ Skull = {
 		if models.models.skull_figure.Avatar.Head.Ears == nil then
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.Ears, true))
 		end
-		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
+		for _, modelPart in ipairs({models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair}) do
+			modelPart:setPos()
+		end
+		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
 			modelPart:setRot()
 		end
 		models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(1, 1, 1)
@@ -67,9 +70,8 @@ Skull = {
 
 		if self.CurrentSkull == 2 then
 			models.models.skull_figure.Avatar.Head:setRot(0, 0, -5)
-			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.RightLine, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.LeftLine}) do
-				modelPart:setRot(0, 0, 5)
-			end
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair:setRot(5, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair:setRot(-5, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(36.262, -24.6503, 17.8279)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom:setRot(57.5, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase:setRot(-10, 10, 0)
@@ -100,9 +102,8 @@ Skull = {
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CMaidBrimH, true))
 			models.models.skull_figure.Avatar.UpperBody.Body:addChild(General:copyModel(models.models.main.Avatar.UpperBody.Body.CMaidAB, true))
 			models.models.skull_figure.Avatar.Head:setRot(0, 0, 5)
-			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.RightLine, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.LeftLine}) do
-				modelPart:setRot(0, 0, -5)
-			end
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair:setRot(5, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair:setRot(-27.5, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(0, -30, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom:setRot(40, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(0, 30, 0)
@@ -124,6 +125,8 @@ Skull = {
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:addChild(General:copyModel(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CCheerleaderLAB, true))
 			models.models.skull_figure.Avatar:setRot(0, -30, 0)
 			models.models.skull_figure.Avatar.Head:setRot(0, 25, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair:setRot(40, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair:setRot(-70, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(151.9245, -11.0311, -19.7339)
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(-37.5, -60, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:setRot(55, 0, 0)
@@ -136,13 +139,14 @@ Skull = {
 			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(4, 0)
 		elseif self.CurrentSkull == 5 then
 			models.models.skull_figure.FigureDArms:setVisible(true)
-			setFigureCostumeTextureOffset(10)
-			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.Head.HairAccessory, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+			setFigureCostumeTextureOffset(11)
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears, models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair, models.models.skull_figure.Avatar.UpperBody.Arms, models.models.skull_figure.Avatar.LowerBody.Apron}) do
 				modelPart:remove()
 			end
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CFoxHoodH, true))
-			models.models.skull_figure.Avatar.Head.CFoxHoodH:setUVPixels()
+			models.models.skull_figure.Avatar.Head.CFoxHoodH:setUVPixels(0, 16)
 			models.models.skull_figure.Avatar:setPos(0, 1.75, -4)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair:setRot(5, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(40, 0, 0)
 			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg:setRot(10, 0, 10)
 			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom:setRot(-15, 0, 0)
@@ -155,7 +159,7 @@ Skull = {
 			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(8, 0)
 		elseif self.CurrentSkull == 6 then
 			setFigureCostumeTextureOffset(16)
-			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.FaceParts.Mouth, models.models.skull_figure.Avatar.Head.HairAccessory, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve.RightSleeveRibbon, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve.LeftSleeveRibbon, models.models.skull_figure.Avatar.LowerBody.Apron}) do
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.FaceParts.Mouth, models.models.skull_figure.Avatar.LowerBody.Apron}) do
 				modelPart:remove()
 			end
 			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.CKimonoH, true))
@@ -163,6 +167,8 @@ Skull = {
 			models.models.skull_figure.Avatar:setPos(0, 1.75, -4)
 			models.models.skull_figure.Avatar:setRot(0, 15, 0)
 			models.models.skull_figure.Avatar.Head:setRot(0, -15, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.FrontHair:setRot(35, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Hairs.BackHair:setRot(-25, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(39.13, 57.07, 7.78)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom:setRot(50, 0, 0)
 			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase:setRot(7.5, 0, 0)
@@ -196,6 +202,10 @@ Skull = {
 		local copiedPart = General:copyModel(models.models.main.Avatar.Head, false)
 		if copiedPart ~= nil then
 			models.script_skull:addChild(copiedPart)
+		end
+		copiedPart = General:copyModel(models.models.main.Avatar.UpperBody.Body.Hairs, false)
+		if copiedPart ~= nil then
+			models.script_skull.Head:addChild(copiedPart)
 		end
 		models.script_skull.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
 		for _, modelPart in ipairs({models.script_skull.Head.FaceParts.Eyes.RightEye.RightSpyglassPivot, models.script_skull.Head.FaceParts.Eyes.LeftEye.LeftSpyglassPivot}) do
