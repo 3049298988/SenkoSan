@@ -318,7 +318,8 @@
 		"models.models.fox_fire": {
 			"primaryRenderType": "EMISSIVE_SOLID"
 		},
-		"models.models.skull_figure_a.Skull": {
+		"models.models.skull_figure": {
+			"parentType": "Skull",
 			"visible": false
 		},
 		"models.models.skull_figure_b.Skull": {

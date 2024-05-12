@@ -64,14 +64,16 @@ General = {
 
 	    ---モデルパーツをディープコピーする。非表示のモデルパーツはコピーしない。
     ---@param modelPart ModelPart コピーするモデルパーツ
+	---@param copyInvisibleParts boolean 非表示のモデルパーツをコピーするかどうか
     ---@return ModelPart? copiedModelPart コピーされたモデルパーツ。入力されたモデルパーツが非表示の場合はnilが返る。
-    copyModel = function (self, modelPart)
-        if modelPart:getVisible() then
+    copyModel = function (self, modelPart, copyInvisibleParts)
+        if modelPart:getVisible() or copyInvisibleParts then
             local copy = modelPart:copy(modelPart:getName())
             copy:setParentType("None")
+			copy:setVisible(true)
             for _, child in ipairs(copy:getChildren()) do
                 copy:removeChild(child)
-                local childModel = self:copyModel(child)
+                local childModel = self:copyModel(child, copyInvisibleParts)
                 if childModel ~= nil then
                     copy:addChild(childModel)
                 end

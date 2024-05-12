@@ -21,13 +21,83 @@ Skull = {
     ---@type integer
     ForceGenerateCount = 2,
 
+	---フィギュアの頭ブロックモデルを生成する。
+	generateSkullFigureModel = function (self)
+		--既存の頭ブロックのモデルを生成する。
+		if models.models.skull_figure.Avatar ~= nil then
+			models.models.skull_figure.Avatar:remove()
+		end
+
+		--頭ブロックのモデル生成の前処理
+		local currentCostume = Costume.CurrentCostume
+		Costume.resetCostume()
+
+		--頭ブロックのモデルを生成する。
+		local copiedPart = General:copyModel(models.models.main.Avatar, false)
+		if copiedPart ~= nil then
+			models.models.skull_figure:addChild(copiedPart)
+			models.models.skull_figure.Avatar:setPos(0, 2.5, 0)
+		end
+		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.FaceParts.Eyes.RightEye.RightSpyglassPivot, models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftSpyglassPivot, models.models.skull_figure.Avatar.UpperBody.Body.ParrotPivots, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot}) do
+			modelPart:remove()
+		end
+		if models.models.skull_figure.Avatar.Head.Ears == nil then
+			models.models.skull_figure.Avatar.Head:addChild(General:copyModel(models.models.main.Avatar.Head.Ears, true))
+		end
+		for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.Ears.RightEarPivot, models.models.skull_figure.Avatar.Head.Ears.LeftEarPivot, models.models.skull_figure.Avatar.UpperBody.Body.Tail}) do
+			modelPart:setRot()
+		end
+		models.models.skull_figure.Avatar.Head.FaceParts.Complexion:setUVPixels()
+		models.models.skull_figure.Avatar.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
+		local armorParts = {models.models.skull_figure.Avatar.Head.ArmorH, models.models.skull_figure.Avatar.UpperBody.Body.ArmorB, models.models.skull_figure.Avatar.UpperBody.Body.Tail.ArmorT, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.ArmorRA, models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ArmorRAB, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.ArmorLA, models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.ArmorLAB, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.ArmorRL, models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ArmorRLB, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.ArmorLL, models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom.ArmorLLB}
+		for i = 1, #armorParts do
+			if armorParts[i] ~= nil then
+				armorParts[i]:remove()
+			end
+		end
+
+		if self.CurrentSkull == 2 then
+			models.models.skull_figure.Avatar.Head:setRot(0, 0, -5)
+			for _, modelPart in ipairs({models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.RightLine, models.models.skull_figure.Avatar.Head.HairAccessory.HairAccessoryLines.LeftLine}) do
+				modelPart:setRot(0, 0, 5)
+			end
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setPos(5, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setRot(137.9457, 7.2606, -167.6226)
+			models.models.skull_figure.Avatar.UpperBody.Body.Tail:setScale(0.8, 0.8, 0.8)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm:setRot(36.262, -24.6503, 17.8279)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom:setRot(57.5, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase:setRot(-10, 10, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve:setRot(-30, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBase.RightSleeve:setPivot(5.5, 14, 4)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm:setRot(69.3531, 14.0761, -5.2362)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom:setRot(65, 0, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase:setRot(-20, -20, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve:setRot(-40, -30, 0)
+			models.models.skull_figure.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBase.LeftSleeve:setPivot(-5.5, 14, 4)
+			models.models.skull_figure.Avatar.LowerBody.Apron:setRot(10, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Apron.ApronBottom:setRot(20, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg:setRot(-19.7198, 3.4049, 9.408)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom:setRot(-20, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.RightLeg.RightLegBottom:setPivot(2, 6, -2)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg:setRot(5.0429, -7.4713, -0.6574)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setRot(-10, 0, 0)
+			models.models.skull_figure.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom:setPivot(-2, 6, -2)
+			models.models.skull_figure.Avatar.Head.FaceParts.Mouth:setUVPixels(4, 0)
+		end
+
+		--頭ブロックのモデル生成の後処理
+		if currentCostume ~= "DEFAULT" then
+			Costume.setCostume(currentCostume)
+		end
+	end,
+
 	---初期化関数
 	init = function (self)
 		---デフォルトの頭ブロックを生成
 		---@diagnostic disable-next-line: discard-returns
         models:newPart("script_skull", "Skull")
 		models.script_skull:setPos(0, -24, 0)
-		local copiedPart = General:copyModel(models.models.main.Avatar.Head)
+		local copiedPart = General:copyModel(models.models.main.Avatar.Head, false)
 		if copiedPart ~= nil then
 			models.script_skull:addChild(copiedPart)
 		end
@@ -36,6 +106,10 @@ Skull = {
 			modelPart:remove()
 		end
 
+		models.script_skull:setVisible(false)
+
+		models.models.skull_figure:setScale(0.4, 0.4, 0.4)
+
 		events.ENTITY_INIT:register(function ()
 			local loadedData = Config.loadConfig("skull", 1)
 			if loadedData <= #self.SkullList then
@@ -43,6 +117,19 @@ Skull = {
 			else
 				Config.saveConfig("skull", 1)
 			end
+			if self.CurrentSkull > 1 then
+				self:generateSkullFigureModel()
+			end
+
+			events.SKULL_RENDER:register(function (delta, block, item, entity, ctx)
+				if player:isLoaded() and (ctx == "HEAD" or Skull.CurrentSkull == 1) then
+					models.script_skull:setVisible(true)
+					models.models.skull_figure:setVisible(false)
+				else
+					models.script_skull:setVisible(false)
+					models.models.skull_figure:setVisible(true)
+				end
+			end)
 		end)
 	end
 }
