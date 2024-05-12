@@ -26,11 +26,6 @@ Portrait = {
             if models.script_portrait.Head.ArmorH ~= nil then
                 models.script_portrait.Head.ArmorH:remove()
             end
-            if models.script_portrait.Head.HairAccessory ~= nil then
-                for _, modelPart in ipairs({models.script_portrait.Head.HairAccessory.HairAccessoryLines.RightLine, models.script_portrait.Head.HairAccessory.HairAccessoryLines.LeftLine}) do
-                    modelPart:setRot()
-                end
-            end
             models.script_portrait.Head.FaceParts.Eyes.RightEye.RightEye:setUVPixels()
             models.script_portrait.Head.FaceParts.Eyes.LeftEye.LeftEye:setUVPixels(0, 6)
             models.script_portrait.Head.FaceParts.Mouth:remove()
