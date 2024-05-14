@@ -134,7 +134,14 @@ FoxFire = {
         ---@param delta number レンダーイベントのデルタ値
         instance.onRender = function (self, delta)
             local fps = client:getFPS()
+            local ModelScalePrev = self.ModelScale
             self.ModelScale = self.IsLit[2] and math.min(self.ModelScale + 8 / fps, 1) or math.max(self.ModelScale - 8 / fps, 0)
+            if self.ModelScale == 0 and ModelScalePrev > 0 then
+                local particlePos = self.FoxFireModel:getPos():scale(0.0625)
+                for _ = 1, 3 do
+                    particles:newParticle("minecraft:smoke", particlePos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.125, math.random() * 0.375 - 0.1875))
+                end
+            end
             if self.FlickerCount >= 0 then
                 self.FlickerCount = math.min(self.FlickerCount + 8 / fps, 1)
                 self.FlickerScale = self.FlickerCount <= 0.5 and 1 - self.FlickerCount / 8 or (self.FlickerCount - 0.5) / 8 + 0.9375
