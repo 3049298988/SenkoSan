@@ -55,7 +55,11 @@ FoxFire = {
 
         ---魂の炎のパーティクルを表示するまでのカウンター
         ---@type integer
-        instance.ParticleCount = math.random(1, 8)
+        instance.FrameParticleCount = math.random(1, 8)
+
+        ---煙のパーティクルを表示するまでのカウンター
+        ---@type integer
+        instance.SmokeParticleCount = 2
 
         ---狐火が点いているかどうか
         ---@type boolean
@@ -67,7 +71,7 @@ FoxFire = {
         ---ティックイベントで呼び出される関数
         instance.onTick = function (self)
             self.TargetPos = General.getModelWorldPos(models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID]):scale(16)
-            self.CurrentPos = self.FoxFireModel:getPos():sub(0, instance.FloatingOffset, 0)
+            self.CurrentPos = self.FoxFireModel:getPos():sub(0, self.FloatingOffset, 0)
             self.NextTargetPos = self.CurrentPos:copy():add(self.TargetPos:copy():sub(self.CurrentPos):scale(0.2))
             if self.TargetPos:copy():sub(self.CurrentPos):length() / 16 >= 16 then
                 self.NextTargetPos = self.TargetPos
@@ -82,10 +86,18 @@ FoxFire = {
                 end
             end
             if self.ModelScale > 0 then
-                instance.ParticleCount = instance.ParticleCount - 1
-                if instance.ParticleCount == 0 then
-                    particles:newParticle("minecraft:soul_fire_flame", self.FoxFireModel:getPos():scale(0.0625):add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
-                    instance.ParticleCount = 4
+                self.FrameParticleCount = self.FrameParticleCount - 1
+                local particlePos = self.FoxFireModel:getPos():scale(0.0625)
+                if self.FrameParticleCount == 0 then
+                    particles:newParticle("minecraft:soul_fire_flame", particlePos:copy():add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
+                    self.FrameParticleCount = math.random(4, 8)
+                end
+                if world.getRainGradient() > 0 and world.isOpenSky(particlePos) then
+                    self.SmokeParticleCount = self.SmokeParticleCount - 1
+                    if self.SmokeParticleCount == 0 then
+                        particles:newParticle("minecraft:smoke", particlePos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.125, math.random() * 0.375 - 0.1875))
+                        self.SmokeParticleCount = 2
+                    end
                 end
             end
             if self.NextFlickerCount == 0 then
