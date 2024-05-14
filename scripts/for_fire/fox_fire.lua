@@ -69,6 +69,14 @@ FoxFire = {
                 self.NextTargetPos = self.TargetPos
                 self.CurrentPos = self.TargetPos
             end
+            if not self.IsFinal then
+                local block = world.getBlockState(self.CurrentPos:copy():scale(0.0625))
+                if block.id == "minecraft:water" then
+                    self.IsLit = self.CurrentPos.y * 0.0625 % 1 > (8 - tonumber(block.properties.level)) * 0.125
+                else
+                    self.IsLit = true
+                end
+            end
             if self.NextFlickerCount == 0 then
                 self.FlickerCount = 0
             end
