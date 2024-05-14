@@ -102,7 +102,7 @@ FoxFire = {
             if self.IsLit[2] ~= self.IsLit[1] and self.Phase == "NORMAL" then
                 sounds:playSound(self.IsLit[2] and "minecraft:item.firecharge.use" or "minecraft:block.fire.extinguish", self.FoxFireModel:getPos():scale(0.0625), 0.25, 2)
             end
-            if self.ModelScale > 0 then
+            if self.FoxFireModel:getVisible() and self.ModelScale > 0 then
                 self.FrameParticleCount = self.FrameParticleCount - 1
                 local particlePos = self.FoxFireModel:getPos():scale(0.0625)
                 if self.FrameParticleCount == 0 then
@@ -126,6 +126,7 @@ FoxFire = {
                 self.FoxFireModel:remove()
                 self.CanAbort = true
             end
+            self.FoxFireModel:setVisible(not renderer:isFirstPerson() or FoxFireManager.IsVisibleInFirstPerson)
             self.NextFlickerCount = math.max(self.NextFlickerCount - 1, -1)
         end
 
@@ -161,7 +162,7 @@ FoxFire = {
         instance.FoxFireModel:setPos(instance.NextTargetPos)
         instance.FoxFireModel:setScale(vectors.vec3(1, 1, 1):scale(instance.ModelScale * instance.FlickerScale))
         instance.FoxFireModel:setColor(instance.FoxFireModel:getScale())
-        instance.FoxFireModel:setVisible(true)
+        instance.FoxFireModel:setVisible(not renderer:isFirstPerson() or FoxFireManager.IsVisibleInFirstPerson)
 
         return instance
     end

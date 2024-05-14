@@ -12,6 +12,10 @@ FoxFireManager = {
     ---@type boolean
     HasNightVision = false,
 
+    ---一人称視点で狐火が見えるかどうか
+    ---@type boolean
+    IsVisibleInFirstPerson = Config.loadConfig("foxFireInFirstPerson", true),
+
     ---このワールドレンダーティックでレンダー処理をしたかどうか
     ---@type boolean
     IsRenderProcessed = false,
