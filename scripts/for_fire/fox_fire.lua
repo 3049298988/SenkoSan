@@ -86,10 +86,16 @@ FoxFire = {
             end
             if self.Phase ~= "FINAL" then
                 local block = world.getBlockState(self.CurrentPos:copy():scale(0.0625))
+                local fluifData = block:getFluidTags()
                 if block.id == "minecraft:water" then
-                    table.insert(self.IsLit, self.CurrentPos.y * 0.0625 % 1 > (8 - tonumber(block.properties.level)) * 0.125)
+                    local waterLevel = tonumber(block.properties.level)
+                    if waterLevel <= 7 then
+                        table.insert(self.IsLit, self.CurrentPos.y * 0.0625 % 1 > (8 - waterLevel) * 0.125)
+                    else
+                        table.insert(self.IsLit, false)
+                    end
                 else
-                    table.insert(self.IsLit, true)
+                    table.insert(self.IsLit, not (fluifData[2] ~= nil and fluifData[2] == "c:water"))
                 end
                 table.remove(self.IsLit, 1)
             end
