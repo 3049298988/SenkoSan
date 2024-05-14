@@ -53,6 +53,10 @@ FoxFire = {
         ---@type number
         instance.FloatingOffset = 0
 
+        ---魂の炎のパーティクルを表示するまでのカウンター
+        ---@type integer
+        instance.ParticleCount = math.random(1, 8)
+
         ---狐火が点いているかどうか
         ---@type boolean
         instance.IsLit = true
@@ -75,6 +79,13 @@ FoxFire = {
                     self.IsLit = self.CurrentPos.y * 0.0625 % 1 > (8 - tonumber(block.properties.level)) * 0.125
                 else
                     self.IsLit = true
+                end
+            end
+            if self.ModelScale > 0 then
+                instance.ParticleCount = instance.ParticleCount - 1
+                if instance.ParticleCount == 0 then
+                    particles:newParticle("minecraft:soul_fire_flame", self.FoxFireModel:getPos():scale(0.0625):add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
+                    instance.ParticleCount = 4
                 end
             end
             if self.NextFlickerCount == 0 then
