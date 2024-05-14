@@ -1,3 +1,9 @@
+---インスタンスのフェーズを示す列挙型
+---@alias FoxFire.InstancePhase
+---| "INIT" 初期化～狐火の火力が最大になるまで
+---| "NORMAL" 通常時
+---| "FINAL" インスタンス破棄フラグオン～狐火を消火するまで
+
 ---@class FoxFire 狐火個別のインスタンスを生成するクラス
 FoxFire = {
     ---狐火のインスタンスを新しく生成する。
@@ -61,12 +67,13 @@ FoxFire = {
         ---@type integer
         instance.SmokeParticleCount = 2
 
-        ---狐火が点いているかどうか
-        ---@type boolean
-        instance.IsLit = true
+        ---インスタンスの現在フェーズ
+        ---@type FoxFire.InstancePhase
+        instance.Phase = "INIT"
 
-        ---このインスタンスを破棄する直前のフェーズかどうか
-        instance.IsFinal = false
+        ---狐火が点いているかどうか
+        ---@type boolean[]
+        instance.IsLit = {true, true}
 
         ---ティックイベントで呼び出される関数
         instance.onTick = function (self)
@@ -77,13 +84,17 @@ FoxFire = {
                 self.NextTargetPos = self.TargetPos
                 self.CurrentPos = self.TargetPos
             end
-            if not self.IsFinal then
+            if self.Phase ~= "FINAL" then
                 local block = world.getBlockState(self.CurrentPos:copy():scale(0.0625))
                 if block.id == "minecraft:water" then
-                    self.IsLit = self.CurrentPos.y * 0.0625 % 1 > (8 - tonumber(block.properties.level)) * 0.125
+                    table.insert(self.IsLit, self.CurrentPos.y * 0.0625 % 1 > (8 - tonumber(block.properties.level)) * 0.125)
                 else
-                    self.IsLit = true
+                    table.insert(self.IsLit, true)
                 end
+                table.remove(self.IsLit, 1)
+            end
+            if self.IsLit[2] ~= self.IsLit[1] and self.Phase == "NORMAL" then
+                sounds:playSound(self.IsLit[2] and "minecraft:item.firecharge.use" or "minecraft:block.fire.extinguish", self.FoxFireModel:getPos():scale(0.0625), 0.25, 2)
             end
             if self.ModelScale > 0 then
                 self.FrameParticleCount = self.FrameParticleCount - 1
@@ -103,7 +114,9 @@ FoxFire = {
             if self.NextFlickerCount == 0 then
                 self.FlickerCount = 0
             end
-            if self.IsFinal and self.ModelScale == 0 then
+            if self.Phase == "INIT" and self.ModelScale == 1 then
+                self.Phase = "NORMAL"
+            elseif self.Phase == "FINAL" and self.ModelScale == 0 then
                 self.FoxFireModel:remove()
                 self.CanAbort = true
             end
@@ -114,7 +127,7 @@ FoxFire = {
         ---@param delta number レンダーイベントのデルタ値
         instance.onRender = function (self, delta)
             local fps = client:getFPS()
-            self.ModelScale = self.IsLit and math.min(self.ModelScale + 8 / fps, 1) or math.max(self.ModelScale - 8 / fps, 0)
+            self.ModelScale = self.IsLit[2] and math.min(self.ModelScale + 8 / fps, 1) or math.max(self.ModelScale - 8 / fps, 0)
             if self.FlickerCount >= 0 then
                 self.FlickerCount = math.min(self.FlickerCount + 8 / fps, 1)
                 self.FlickerScale = self.FlickerCount <= 0.5 and 1 - self.FlickerCount / 8 or (self.FlickerCount - 0.5) / 8 + 0.9375
@@ -133,8 +146,9 @@ FoxFire = {
 
         ---このインスタンスが破棄される場合に呼び出される関数
         instance.onDeinit = function (self)
-            self.IsLit = false
-            self.IsFinal = true
+            table.insert(self.IsLit, false)
+            table.remove(self.IsLit, 1)
+            self.Phase = "FINAL"
         end
 
         models.script_fox_fire_manager:addChild(instance.FoxFireModel)
