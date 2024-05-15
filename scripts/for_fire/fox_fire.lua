@@ -109,7 +109,22 @@ FoxFire = {
                 self.FrameParticleCount = self.FrameParticleCount - 1
                 local particlePos = self.FoxFireModel:getPos():scale(0.0625)
                 if self.FrameParticleCount == 0 then
-                    particles:newParticle("minecraft:soul_fire_flame", particlePos:copy():add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
+                    local foundSoulBlock = false
+                    for i = 0, 3 do
+                        local blockId = world.getBlockState(self.CurrentPos:copy():scale(0.0625):sub(0, i, 0)).id
+                        if blockId == "minecraft:soul_sand" or blockId == "minecraft:soul_soil" then
+                            foundSoulBlock = true
+                            break
+                        end
+                    end
+                    if foundSoulBlock then
+                        for _ = 1, 5 do
+                            local offsetPos = vectors.vec3(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875)
+                            particles:newParticle("minecraft:soul_fire_flame", particlePos:copy():add(offsetPos)):setVelocity(offsetPos:copy():scale(0.05))
+                        end
+                    else
+                        particles:newParticle("minecraft:soul_fire_flame", particlePos:copy():add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
+                    end
                     self.FrameParticleCount = math.random(4, 8)
                 end
                 if world.getRainGradient() > 0 and world.isOpenSky(particlePos) then
