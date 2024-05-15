@@ -77,7 +77,10 @@ FoxFire = {
 
         ---ティックイベントで呼び出される関数
         instance.onTick = function (self)
-            self.TargetPos = General.getModelWorldPos(models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID]):scale(16)
+            local modelPos = General.getModelWorldPos(models.models.main.FoxFireAnchors["FoxFireAnchor"..self.TargetAnchorID])
+            if modelPos.x == modelPos.x then
+                self.TargetPos = modelPos:scale(16)
+            end
             self.CurrentPos = self.FoxFireModel:getPos():sub(0, self.FloatingOffset, 0)
             self.NextTargetPos = self.CurrentPos:copy():add(self.TargetPos:copy():sub(self.CurrentPos):scale(0.2))
             if self.TargetPos:copy():sub(self.CurrentPos):length() / 16 >= 16 then
