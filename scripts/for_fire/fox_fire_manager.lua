@@ -8,6 +8,9 @@ FoxFireManager = {
     ---@type table[]
     FoxFireInstances = {},
 
+    ---狐火機能が有効かどうか
+    Enabled = false,
+
     ---プレイヤーが暗視状態であるかどうか
     ---@type boolean
     HasNightVision = false,
@@ -24,7 +27,7 @@ FoxFireManager = {
     ---@param self FoxFireManager
     ---@param enabled boolean 狐火を有効化するかどうか
     setFoxFireEnabled = function (self, enabled)
-        if enabled then
+        if enabled and not self.Enabled then
             models.models.main.FoxFireAnchors:setPos(player:getPos():scale(16))
             models.models.main.FoxFireAnchors:setRot(0, player:getBodyYaw() * -1 + 180, 0)
             for i, _ in ipairs(models.models.main.FoxFireAnchors:getChildren()) do
@@ -57,12 +60,13 @@ FoxFireManager = {
             events.WORLD_RENDER:register(function ()
                 self.IsRenderProcessed = false
             end, "fox_fire_manager_world_render")
-        else
+        elseif not enabled and self.Enabled then
             for _, foxFireInstance in ipairs(self.FoxFireInstances) do
                 foxFireInstance:onDeinit()
             end
             sounds:playSound("minecraft:block.fire.extinguish", player:getPos(), 1, 2)
         end
+        self.Enabled = enabled
     end,
 
     ---初期化関数
