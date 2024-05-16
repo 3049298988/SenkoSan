@@ -153,11 +153,11 @@ if host:isHost() then
 
     --アクション1-4. 一人称視点での狐火の表示
     ActionWheel.MainPage:newAction(4):title(Language.getTranslate("action_wheel__main__action_4__title")..Language.getTranslate("action_wheel__toggle_off")):toggleTitle(Language.getTranslate("action_wheel__main__action_4__title")..Language.getTranslate("action_wheel__toggle_on")):item("soul_torch"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
-		FoxFire.FoxFireInFirstPerson = true
+		FoxFireManager.IsVisibleInFirstPerson = true
 		action:hoverColor(0.33, 1, 0.33)
 		Config.saveConfig("foxFireInFirstPerson", true)
 	end):onUntoggle(function (_, action)
-		FoxFire.FoxFireInFirstPerson = false
+		FoxFireManager.IsVisibleInFirstPerson = false
 		action:hoverColor(1, 0.33, 0.33)
 		Config.saveConfig("foxFireInFirstPerson", false)
 	end)

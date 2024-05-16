@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"format_version": "4.5",
+		"format_version": "4.10",
 		"model_format": "free",
 		"box_uv": false
 	},
@@ -213,11 +213,25 @@
 		}
 	],
 	"outliner": [
-		"affcb019-090a-8b29-c914-b40b75efaddb",
-		"ec861810-3d2a-fe8b-cfbe-7bd3d69f4959",
-		"088dcf65-b83f-e311-25f1-c9d3c9c4ca69",
-		"0f96253d-0600-d108-9d91-9c3be89f5ca1",
-		"b5651374-dcd3-ae9e-c6e4-df40ee02d035"
+		{
+			"name": "FoxFire",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "5cb20baa-541f-0aad-196c-ef4bf918a609",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": false,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				"affcb019-090a-8b29-c914-b40b75efaddb",
+				"ec861810-3d2a-fe8b-cfbe-7bd3d69f4959",
+				"088dcf65-b83f-e311-25f1-c9d3c9c4ca69",
+				"0f96253d-0600-d108-9d91-9c3be89f5ca1",
+				"b5651374-dcd3-ae9e-c6e4-df40ee02d035"
+			]
+		}
 	],
 	"textures": [
 		{
@@ -226,7 +240,14 @@
 			"folder": "",
 			"namespace": "",
 			"id": "0",
+			"width": 8,
+			"height": 8,
+			"uv_width": 8,
+			"uv_height": 8,
 			"particle": false,
+			"use_as_default": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -234,10 +255,10 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "efdf3a5e-4960-89c0-e2db-bc261b56d07d",
-			"relative_path": "../../textures/fox_fire.png",
+			"relative_path": "../textures/fox_fire.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAG5JREFUKFNjZFy+5n+8nx8DCCzgZmNM+PrrP5gDBWCB+VysDInffjMs3LSJAaQYxAcBkBhcAUwARKMoQLYCZgKKFegKGJ4/Z/hflMvI2Df5P4OkJKYVIFNAikCSIBqrG0CK/keGMIKsYsTmBmQFABhaTrVCS4GPAAAAAElFTkSuQmCC"
 		}
 	]
