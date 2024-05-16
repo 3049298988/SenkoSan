@@ -62,7 +62,6 @@ General = {
 			end
 			General.EffectChecked = true
 		end
-		printTable(General.EffectTable, 2)
 		return General.EffectTable[name]
 	end,
 
