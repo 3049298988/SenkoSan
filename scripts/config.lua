@@ -71,7 +71,7 @@ function pings.syncAvatarConfig(poseID, nameID, costumeID, skullID, autoShake, s
 		Armor.ShowArmor = showArmor
 		Umbrella.Sound = umbrellaSound
 		Umbrella.AlwaysUse = alwaysUmbrella
-		FoxFire.NightVision = nightVisiton
+		FoxFireManager:setFoxFireEnabled(nightVisiton)
 		Warden.WardenNearby = wardenNearby
 		FaceParts.Drowned = drowned
 		Config.IsSynced = true
@@ -80,7 +80,7 @@ end
 
 events.TICK:register(function ()
 	if Config.NextSyncCount == 0 then
-		pings.syncAvatarConfig(PhotoPose.CurrentPose, ActionWheel.CurrentPlayerNameState, ActionWheel.CurrentCostumeState, ActionWheel.CurrentSkullState, Wet.AutoShake, Armor.ShowArmor, Umbrella.Sound, Umbrella.AlwaysUse, false, Warden.WardenNearby, FaceParts.Drowned)
+		pings.syncAvatarConfig(PhotoPose.CurrentPose, ActionWheel.CurrentPlayerNameState, ActionWheel.CurrentCostumeState, ActionWheel.CurrentSkullState, Wet.AutoShake, Armor.ShowArmor, Umbrella.Sound, Umbrella.AlwaysUse, FoxFireManager.Enabled, Warden.WardenNearby, FaceParts.Drowned)
 		Config.NextSyncCount = 300
 	else
 		Config.NextSyncCount = Config.NextSyncCount - 1
