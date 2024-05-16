@@ -402,10 +402,10 @@ if loadedData <= #Costume.CostumeList then
 	if Costume.CurrentCostume ~= "DEFAULT" then
 		Costume.setCostume(Costume.CurrentCostume, true)
 	else
-		Portrait:generatePortraitModel()
+		Costume.resetCostume(true)
 	end
 else
-	Portrait:generatePortraitModel()
+	Costume.resetCostume(true)
 	Config.saveConfig("costume", 1)
 end
 
