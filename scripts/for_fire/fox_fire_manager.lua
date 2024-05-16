@@ -25,6 +25,8 @@ FoxFireManager = {
     ---@param enabled boolean 狐火を有効化するかどうか
     setFoxFireEnabled = function (self, enabled)
         if enabled then
+            models.models.main.FoxFireAnchors:setPos(player:getPos():scale(16))
+            models.models.main.FoxFireAnchors:setRot(0, player:getBodyYaw() * -1 + 180, 0)
             for i, _ in ipairs(models.models.main.FoxFireAnchors:getChildren()) do
                 table.insert(self.FoxFireInstances, self.FoxFire.new(i))
             end
@@ -44,6 +46,8 @@ FoxFireManager = {
             end, "fox_fire_manager_tick")
             events.RENDER:register(function (delta)
                 if not self.IsRenderProcessed then
+                    models.models.main.FoxFireAnchors:setPos(player:getPos():scale(16))
+                    models.models.main.FoxFireAnchors:setRot(0, player:getBodyYaw(delta) * -1 + 180, 0)
                     for _, foxFireInstance in ipairs(self.FoxFireInstances) do
                         foxFireInstance:onRender(delta)
                     end
