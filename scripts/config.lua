@@ -80,7 +80,7 @@ end
 
 events.TICK:register(function ()
 	if Config.NextSyncCount == 0 then
-		pings.syncAvatarConfig(PhotoPose.CurrentPose, ActionWheel.CurrentPlayerNameState, ActionWheel.CurrentCostumeState, ActionWheel.CurrentSkullState, Wet.AutoShake, Armor.ShowArmor, Umbrella.Sound, Umbrella.AlwaysUse, FoxFire.NightVision, Warden.WardenNearby, FaceParts.Drowned)
+		pings.syncAvatarConfig(PhotoPose.CurrentPose, ActionWheel.CurrentPlayerNameState, ActionWheel.CurrentCostumeState, ActionWheel.CurrentSkullState, Wet.AutoShake, Armor.ShowArmor, Umbrella.Sound, Umbrella.AlwaysUse, false, Warden.WardenNearby, FaceParts.Drowned)
 		Config.NextSyncCount = 300
 	else
 		Config.NextSyncCount = Config.NextSyncCount - 1

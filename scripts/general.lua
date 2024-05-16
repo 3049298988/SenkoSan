@@ -62,7 +62,15 @@ General = {
 		return General.EffectTable[name]
 	end,
 
-	    ---モデルパーツをディープコピーする。非表示のモデルパーツはコピーしない。
+	---指定したモデルのワールド位置を返す。
+    ---@param model ModelPart ワールド位置を取得するモデルパーツ
+    ---@return Vector3 worldPos モデルのワールド位置
+    getModelWorldPos = function(model)
+        local modelMatrix = model:partToWorldMatrix()
+        return vectors.vec3(modelMatrix[4][1], modelMatrix[4][2], modelMatrix[4][3])
+    end,
+
+	---モデルパーツをディープコピーする。非表示のモデルパーツはコピーしない。
     ---@param modelPart ModelPart コピーするモデルパーツ
 	---@param copyInvisibleParts boolean 非表示のモデルパーツをコピーするかどうか
     ---@return ModelPart? copiedModelPart コピーされたモデルパーツ。入力されたモデルパーツが非表示の場合はnilが返る。
