@@ -54,8 +54,11 @@ General = {
 		if not General.EffectChecked and host:isHost() then
 			General.EffectTable = {}
 			for _, effect in ipairs(host:getStatusEffects()) do
-				---@diagnostic disable-next-line: missing-fields
-				General.EffectTable[effect.name:match("^effect%.(.+)$")] = {duration = effect.duration, amplifier = effect.amplifier, visible = effect.visible}
+				local effectName = effect.name:match("^effect%.(.+)$")
+				if effectName ~= nil then
+					---@diagnostic disable-next-line: missing-fields
+					General.EffectTable[effect.name:match("^effect%.(.+)$")] = {duration = effect.duration, amplifier = effect.amplifier, visible = effect.visible}
+				end
 			end
 			General.EffectChecked = true
 		end

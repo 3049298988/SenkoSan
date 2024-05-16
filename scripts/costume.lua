@@ -463,15 +463,11 @@ if loadedData <= #Costume.CostumeList then
 	if Costume.CurrentCostume ~= "DEFAULT" then
 		Costume.setCostume(Costume.CurrentCostume, true)
 	else
-		Portrait:generatePortraitModel()
-		Sleeve.enable()
-		Apron.disable()
+		Costume.resetCostume(true)
 	end
 else
-	Portrait:generatePortraitModel()
+	Costume.resetCostume(true)
 	Config.saveConfig("costume", 1)
-	Sleeve.enable()
-	Apron.disable()
 end
 
 models.models.main.Avatar.Head.CHalloweenH:newBlock("halloween_pumpkin"):block("minecraft:carved_pumpkin"):pos(-5.5, 0.6, 7.5):rot(20, 90, 0):scale(0.15)
