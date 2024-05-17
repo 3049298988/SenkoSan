@@ -3,10 +3,7 @@ name: Generate README
 on:
   push:
     branches:
-      - Senko
-      - Shiro
-      - Suzu
-      - Sora
+      - '[A-Z]*'
     paths:
       - .github/README_templates/**
       - .github/workflows/generate_readme.yml
