@@ -14,9 +14,11 @@
 **鈴**のブランチは[こちら](https://github.com/Gakuto1112/SenkoSan/tree/Suzu)
 
 # Sora（夜空）
+<!-- DESCRIPTION_START -->
 TVアニメ「世話やきキツネの仙狐さん」とその原作に登場するキャラクターを再現した、MinecraftのスキンMod「[Figura](https://modrinth.com/mod/figura)」向けスキン「Sora（夜空）」です。
 
 ターゲットFiguraバージョン：[0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.20.4)
+<!-- DESCRIPTION_END -->
 
 ![メイン](../README_images/main.jpg)
 
