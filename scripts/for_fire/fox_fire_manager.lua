@@ -35,24 +35,28 @@ FoxFireManager = {
             end
             sounds:playSound("minecraft:item.firecharge.use", player:getPos(), 1, 2)
             events.TICK:register(function ()
-                for index, foxFireInstance in ipairs(self.FoxFireInstances) do
-                    foxFireInstance:onTick()
-                    if foxFireInstance.CanAbort then
-                        table.remove(self.FoxFireInstances, index)
-                        if #self.FoxFireInstances == 0 then
-                            events.TICK:remove("fox_fire_manager_tick")
-                            events.RENDER:remove("fox_fire_manager_render")
-                            events.WORLD_RENDER:remove("fox_fire_manager_world_render")
+                if not client:isPaused() then
+                    for index, foxFireInstance in ipairs(self.FoxFireInstances) do
+                        foxFireInstance:onTick()
+                        if foxFireInstance.CanAbort then
+                            table.remove(self.FoxFireInstances, index)
+                            if #self.FoxFireInstances == 0 then
+                                events.TICK:remove("fox_fire_manager_tick")
+                                events.RENDER:remove("fox_fire_manager_render")
+                                events.WORLD_RENDER:remove("fox_fire_manager_world_render")
+                            end
                         end
                     end
                 end
             end, "fox_fire_manager_tick")
             events.RENDER:register(function (delta)
                 if not self.IsRenderProcessed then
-                    models.models.main.FoxFireAnchors:setPos(player:getPos():scale(16))
-                    models.models.main.FoxFireAnchors:setRot(0, player:getBodyYaw(delta) * -1 + 180, 0)
-                    for _, foxFireInstance in ipairs(self.FoxFireInstances) do
-                        foxFireInstance:onRender(delta)
+                    if not client:isPaused() then
+                        models.models.main.FoxFireAnchors:setPos(player:getPos():scale(16))
+                        models.models.main.FoxFireAnchors:setRot(0, player:getBodyYaw(delta) * -1 + 180, 0)
+                        for _, foxFireInstance in ipairs(self.FoxFireInstances) do
+                            foxFireInstance:onRender(delta)
+                        end
                     end
                     self.IsRenderProcessed = true
                 end
