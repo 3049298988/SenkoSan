@@ -10,10 +10,6 @@ General = {
 	---@type boolean
 	EffectChecked = false,
 
-	---ステータスエフェクトを保持する変数
-	---@type table<string, HostAPI.statusEffect>
-	EffectTable = {},
-
 	---プレイヤーの体力・満腹度の度合い
 	---@type General.ConditionLevel
 	PlayerCondition = "HIGH",
@@ -51,18 +47,14 @@ General = {
 	---@param name string ステータス効果
 	---@return table|nil status ステータス効果の情報（該当のステータスを受けていない場合はnilが返る。）
 	getTargetEffect = function (name)
-		if not General.EffectChecked and host:isHost() then
-			General.EffectTable = {}
+		if host:isHost() then
 			for _, effect in ipairs(host:getStatusEffects()) do
 				local effectName = effect.name:match("^effect%.minecraft%.(.+)$")
-				if effectName ~= nil then
-					---@diagnostic disable-next-line: missing-fields
-					General.EffectTable[effectName] = {duration = effect.duration, amplifier = effect.amplifier, visible = effect.visible}
+				if effectName == name then
+					return effect
 				end
 			end
-			General.EffectChecked = true
 		end
-		return General.EffectTable[name]
 	end,
 
 	---指定したモデルのワールド位置を返す。
