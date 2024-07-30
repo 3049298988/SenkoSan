@@ -78,7 +78,7 @@ FoxFireManager = {
         if host:isHost() then
             events.TICK:register(function ()
                 --暗視状態が付与されているか確認する。
-                local hasNightVision = General.getTargetEffect("minecraft.night_vision") ~= nil
+                local hasNightVision = General.getTargetEffect("night_vision") ~= nil
                 if hasNightVision and not self.HasNightVision then
                     pings.setHasNightVisiton(true)
                 elseif not hasNightVision and self.HasNightVision then
