@@ -83,16 +83,16 @@ events.TICK:register(function ()
         if isOpenActionWheel then
 			---@diagnostic disable-next-line: undefined-field
             if not ActionWheel.IsAnimationPlaying and SitDown:checkAction() then
-                ActionWheel.MainPage:getAction(1):title(Language.getTranslate("action_wheel__main__action_1__title")):color(0.91, 0.67, 0.27):hoverColor(1, 1, 1)
+                ActionWheel.MainPage:getAction(1):setTitle(Language.getTranslate("action_wheel__main__action_1__title")):setColor(0.91, 0.67, 0.27):setHoverColor(1, 1, 1)
             else
-                ActionWheel.MainPage:getAction(1):title("§7"..Language.getTranslate("action_wheel__main__action_1__title")):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33)
+                ActionWheel.MainPage:getAction(1):setTitle("§7"..Language.getTranslate("action_wheel__main__action_1__title")):setColor(0.16, 0.16, 0.16):setHoverColor(1, 0.33, 0.33)
             end
         end
         if not isOpenActionWheel and isOpenActionWheelPrev then
             if playerNameState ~= currentPlayerNameState then
                 pings.main_action2(playerNameState)
                 Config.saveConfig("name", playerNameState)
-				sounds:playSound("minecraft:ui.cartography_table.take_result", player:getPos())
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:ui.cartography_table.take_result"), player:getPos())
 				print(Language.getTranslate("action_wheel__main__action_2__done_first")..Nameplate.NameList[playerNameState]..Language.getTranslate("action_wheel__main__action_2__done_last"))
             end
         end
@@ -104,115 +104,115 @@ end)
 if host:isHost() then
     --メインページのアクション設定
     --アクション1-1. 座る
-    ActionWheel.MainPage:newAction(1):toggleColor(0.91, 0.67, 0.27):item("oak_stairs"):onToggle(function(_, action)
+    ActionWheel.MainPage:newAction(1):setToggleColor(0.91, 0.67, 0.27):setItem(CompatibilityUtils:checkItem("minecraft:oak_stairs")):setOnToggle(function(_, action)
 		if not ActionWheel.IsAnimationPlaying then
 			---@diagnostic disable-next-line: undefined-field
 			if SitDown:checkAction() then
 				pings.main_action1_toggle()
 			else print(Language.getTranslate("action_wheel__main__action_1__unavailable"))
-				action:toggled(false)
+				action:setToggled(false)
 			end
 		else
-			action:toggled(false)
+			action:setToggled(false)
 		end
-    end):onUntoggle(function ()
+    end):setOnUntoggle(function ()
 		pings.main_action1_untoggle()
     end)
 
     --アクション1-2. 名前変更
-	ActionWheel.MainPage:newAction(2):title(Language.getTranslate("action_wheel__main__action_2__title")):color(0.91, 0.67, 0.27):hoverColor(1, 1, 1):item("name_tag"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function (direction)
+	ActionWheel.MainPage:newAction(2):setTitle(Language.getTranslate("action_wheel__main__action_2__title")):setColor(0.91, 0.67, 0.27):setHoverColor(1, 1, 1):setItem(CompatibilityUtils:checkItem("minecraft:name_tag")):setColor(0.78, 0.78, 0.78):setHoverColor(1, 1, 1):setOnScroll(function (direction)
         if direction < 0 then
             playerNameState = playerNameState == #Nameplate.NameList and 1 or playerNameState + 1
         else
             playerNameState = playerNameState == 1 and #Nameplate.NameList or playerNameState - 1
         end
         setNameChangeActionTitle()
-    end):onLeftClick(function ()
+    end):setOnLeftClick(function ()
         playerNameState = currentPlayerNameState
         setNameChangeActionTitle()
-    end):onRightClick(function ()
+    end):setOnRightClick(function ()
         playerNameState = 1
         setNameChangeActionTitle()
     end)
 
     --アクション1-3. 防具の表示
-	ActionWheel.MainPage:newAction(3):title(Language.getTranslate("action_wheel__main__action_3__title")..Language.getTranslate("action_wheel__toggle_off")):toggleTitle(Language.getTranslate("action_wheel__main__action_3__title")..Language.getTranslate("action_wheel__toggle_on")):item("iron_chestplate"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):onToggle(function (_, action)
+	ActionWheel.MainPage:newAction(3):setTitle(Language.getTranslate("action_wheel__main__action_3__title")..Language.getTranslate("action_wheel__toggle_off")):setToggleTitle(Language.getTranslate("action_wheel__main__action_3__title")..Language.getTranslate("action_wheel__toggle_on")):setItem(CompatibilityUtils:checkItem("minecraft:iron_chestplate")):setColor(0.67, 0, 0):setHoverColor(1, 0.33, 0.33):setOnToggle(function (_, action)
 		pings.main_action3_toggle()
-		action:hoverColor(0.33, 1, 0.33)
+		action:setHoverColor(0.33, 1, 0.33)
 		Config.saveConfig("showArmor", true)
-	end):onUntoggle(function (_, action)
+	end):setOnUntoggle(function (_, action)
 		pings.main_action3_untoggle()
-		action:hoverColor(1, 0.33, 0.33)
+		action:setHoverColor(1, 0.33, 0.33)
 		Config.saveConfig("showArmor", false)
 	end)
 	if Config.loadConfig("showArmor", false) then
 		local action = ActionWheel.MainPage:getAction(3)
-		action:toggled(true)
-		action:hoverColor(0.33, 1, 0.33)
+		action:setToggled(true)
+		action:setHoverColor(0.33, 1, 0.33)
 	end
 
     --アクション1-4. 一人称視点での狐火の表示
-    ActionWheel.MainPage:newAction(4):title(Language.getTranslate("action_wheel__main__action_4__title")..Language.getTranslate("action_wheel__toggle_off")):toggleTitle(Language.getTranslate("action_wheel__main__action_4__title")..Language.getTranslate("action_wheel__toggle_on")):item("soul_torch"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+    ActionWheel.MainPage:newAction(4):setTitle(Language.getTranslate("action_wheel__main__action_4__title")..Language.getTranslate("action_wheel__toggle_off")):setToggleTitle(Language.getTranslate("action_wheel__main__action_4__title")..Language.getTranslate("action_wheel__toggle_on")):setItem(CompatibilityUtils:checkItem("minecraft:soul_torch")):setColor(0.67, 0, 0):setHoverColor(1, 0.33, 0.33):setToggleColor(0, 0.67, 0):setOnToggle(function (_, action)
 		FoxFireManager.IsVisibleInFirstPerson = true
-		action:hoverColor(0.33, 1, 0.33)
+		action:setHoverColor(0.33, 1, 0.33)
 		Config.saveConfig("foxFireInFirstPerson", true)
-	end):onUntoggle(function (_, action)
+	end):setOnUntoggle(function (_, action)
 		FoxFireManager.IsVisibleInFirstPerson = false
-		action:hoverColor(1, 0.33, 0.33)
+		action:setHoverColor(1, 0.33, 0.33)
 		Config.saveConfig("foxFireInFirstPerson", false)
 	end)
 	if Config.loadConfig("foxFireInFirstPerson", true) then
 		local action = ActionWheel.MainPage:getAction(4)
-		action:toggled(true)
-		action:hoverColor(0.33, 1, 0.33)
+		action:setToggled(true)
+		action:setHoverColor(0.33, 1, 0.33)
 	end
 
     --アクション1-5. 傘の開閉音
-	ActionWheel.MainPage:newAction(5):title(Language.getTranslate("action_wheel__main__action_5__title")..Language.getTranslate("action_wheel__toggle_off")):toggleTitle(Language.getTranslate("action_wheel__main__action_5__title")..Language.getTranslate("action_wheel__toggle_on")):item("note_block"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+	ActionWheel.MainPage:newAction(5):setTitle(Language.getTranslate("action_wheel__main__action_5__title")..Language.getTranslate("action_wheel__toggle_off")):setToggleTitle(Language.getTranslate("action_wheel__main__action_5__title")..Language.getTranslate("action_wheel__toggle_on")):setItem(CompatibilityUtils:checkItem("minecraft:note_block")):setColor(0.67, 0, 0):setHoverColor(1, 0.33, 0.33):setToggleColor(0, 0.67, 0):setOnToggle(function (_, action)
 		pings.main_action5_toggle()
-		action:hoverColor(0.33, 1, 0.33)
+		action:setHoverColor(0.33, 1, 0.33)
 		Config.saveConfig("umbrellaSound", true)
-	end):onUntoggle(function (_, action)
+	end):setOnUntoggle(function (_, action)
 		pings.main_action5_untoggle()
-		action:hoverColor(1, 0.33, 0.33)
+		action:setHoverColor(1, 0.33, 0.33)
 		Config.saveConfig("umbrellaSound", false)
 	end)
 	if Config.loadConfig("umbrellaSound", true) then
 		local action = ActionWheel.MainPage:getAction(5)
-		action:toggled(true)
-		action:hoverColor(0.33, 1, 0.33)
+		action:setToggled(true)
+		action:setHoverColor(0.33, 1, 0.33)
 	end
 
     --アクション1-6. 常に傘をさす
-	ActionWheel.MainPage:newAction(6):title(Language.getTranslate("action_wheel__main__action_6__title")..Language.getTranslate("action_wheel__toggle_off")):toggleTitle(Language.getTranslate("action_wheel__main__action_6__title")..Language.getTranslate("action_wheel__toggle_on")):item("red_carpet"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+	ActionWheel.MainPage:newAction(6):setTitle(Language.getTranslate("action_wheel__main__action_6__title")..Language.getTranslate("action_wheel__toggle_off")):setToggleTitle(Language.getTranslate("action_wheel__main__action_6__title")..Language.getTranslate("action_wheel__toggle_on")):setItem(CompatibilityUtils:checkItem("minecraft:red_carpet")):setColor(0.67, 0, 0):setHoverColor(1, 0.33, 0.33):setToggleColor(0, 0.67, 0):setOnToggle(function (_, action)
 		pings.main_action6_toggle()
-		action:hoverColor(0.33, 1, 0.33)
+		action:setHoverColor(0.33, 1, 0.33)
 		Config.saveConfig("alwaysUmbrella", true)
-	end):onUntoggle(function (_, action)
+	end):setOnUntoggle(function (_, action)
 		pings.main_action6_untoggle()
-		action:hoverColor(1, 0.33, 0.33)
+		action:setHoverColor(1, 0.33, 0.33)
 		Config.saveConfig("alwaysUmbrella", false)
 	end)
 	if Config.loadConfig("alwaysUmbrella", false) then
 		local action = ActionWheel.MainPage:getAction(6)
-		action:toggled(true)
-		action:hoverColor(0.33, 1, 0.33)
+		action:setToggled(true)
+		action:setHoverColor(0.33, 1, 0.33)
 	end
 
     --アクション1-7. 頻出メッセージの表示
-	ActionWheel.MainPage:newAction(7):title(Language.getTranslate("action_wheel__main__action_7__title")..Language.getTranslate("action_wheel__toggle_off")):toggleTitle(Language.getTranslate("action_wheel__main__action_7__title")..Language.getTranslate("action_wheel__toggle_on")):item("cake"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+	ActionWheel.MainPage:newAction(7):setTitle(Language.getTranslate("action_wheel__main__action_7__title")..Language.getTranslate("action_wheel__toggle_off")):setToggleTitle(Language.getTranslate("action_wheel__main__action_7__title")..Language.getTranslate("action_wheel__toggle_on")):setItem(CompatibilityUtils:checkItem("minecraft:cake")):setColor(0.67, 0, 0):setHoverColor(1, 0.33, 0.33):setToggleColor(0, 0.67, 0):setOnToggle(function (_, action)
 		General.ShowMessage = true
-		action:hoverColor(0.33, 1, 0.33)
+		action:setHoverColor(0.33, 1, 0.33)
 		Config.saveConfig("showMessage", true)
-	end):onUntoggle(function (_, action)
+	end):setOnUntoggle(function (_, action)
 		General.ShowMessage = false
-		action:hoverColor(1, 0.33, 0.33)
+		action:setHoverColor(1, 0.33, 0.33)
 		Config.saveConfig("showMessage", false)
 	end)
 	if Config.loadConfig("showMessage", true) then
 		local action = ActionWheel.MainPage:getAction(7)
-		action:toggled(true)
-		action:hoverColor(0.33, 1, 0.33)
+		action:setToggled(true)
+		action:setHoverColor(0.33, 1, 0.33)
 	else
 		General.ShowMessage = false
 	end

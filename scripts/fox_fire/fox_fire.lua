@@ -111,7 +111,7 @@ FoxFire = {
                 table.remove(self.IsLit, 1)
             end
             if self.IsLit[2] ~= self.IsLit[1] and self.Phase == "NORMAL" then
-                sounds:playSound(self.IsLit[2] and "minecraft:item.firecharge.use" or "minecraft:block.fire.extinguish", self.FoxFireModel:getPos():scale(0.0625), 0.25, 2)
+                sounds:playSound(CompatibilityUtils:checkSound(self.IsLit[2] and "minecraft:item.firecharge.use" or "minecraft:block.fire.extinguish"), self.FoxFireModel:getPos():scale(0.0625), 0.25, 2)
             end
             if self.ModelScale > 0 then
                 self.IsAboveSoudBlock = false
@@ -129,27 +129,27 @@ FoxFire = {
                         if self.IsAboveSoudBlock then
                             for _ = 1, 5 do
                                 local offsetPos = vectors.vec3(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875)
-                                particles:newParticle("minecraft:soul_fire_flame", particlePos:copy():add(offsetPos)):setVelocity(offsetPos:copy():scale(0.05))
+                                particles:newParticle(CompatibilityUtils:checkParticle("minecraft:soul_fire_flame"), particlePos:copy():add(offsetPos)):setVelocity(offsetPos:copy():scale(0.05))
                             end
                         else
-                            particles:newParticle("minecraft:soul_fire_flame", particlePos:copy():add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:soul_fire_flame"), particlePos:copy():add(math.random() * 0.375 - 0.1875, math.random() * 0.375 - 0.0625, math.random() * 0.375 - 0.1875))
                         end
                         self.FrameParticleCount = math.random(4, 8)
                     end
                     if world.getRainGradient() > 0 and world.isOpenSky(particlePos) then
                         self.SmokeParticleCount = self.SmokeParticleCount - 1
                         if self.SmokeParticleCount == 0 then
-                            particles:newParticle("minecraft:smoke", particlePos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.125, math.random() * 0.375 - 0.1875))
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), particlePos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.125, math.random() * 0.375 - 0.1875))
                             self.SmokeParticleCount = 2
                         end
                     end
                     self.AmbientSoundCount = self.AmbientSoundCount - 1
                     if self.AmbientSoundCount == 0 then
                         if self.IsAboveSoudBlock then
-                            sounds:playSound("minecraft:item.firecharge.use", self.CurrentPos:copy():scale(0.0625), 0.02, 0.5)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.firecharge.use"), self.CurrentPos:copy():scale(0.0625), 0.02, 0.5)
                             self.AmbientSoundCount = math.random(20, 40)
                         else
-                            sounds:playSound("minecraft:block.fire.ambient", self.CurrentPos:copy():scale(0.0625), 0.1, 1)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.fire.ambient"), self.CurrentPos:copy():scale(0.0625), 0.1, 1)
                             self.AmbientSoundCount = math.random(51, 100)
                         end
                     end
@@ -177,7 +177,7 @@ FoxFire = {
             if self.ModelScale == 0 and ModelScalePrev > 0 then
                 local particlePos = self.FoxFireModel:getPos():scale(0.0625)
                 for _ = 1, 3 do
-                    particles:newParticle("minecraft:smoke", particlePos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.125, math.random() * 0.375 - 0.1875))
+                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), particlePos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.125, math.random() * 0.375 - 0.1875))
                 end
             end
             if self.FlickerCount >= 0 then

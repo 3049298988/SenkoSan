@@ -33,7 +33,7 @@ function pings.jerk_ears()
 	for _, modelAnimation in ipairs({animations["models.main"], animations["models.armor"]}) do
 		modelAnimation["jerk_ears"]:play()
 	end
-	sounds:playSound("entity.egg.throw", player:getPos(), 0.25, 2)
+	sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.egg.throw"), player:getPos(), 0.25, 2)
 	Ears.JerkEarsCount = 5
 end
 

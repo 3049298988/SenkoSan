@@ -13,9 +13,9 @@ end
 
 events.TICK:register(function ()
 	if Tail.WagTailCount == 18 then
-		sounds:playSound("block.grass.step", player:getPos(), 1, 1)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grass.step"), player:getPos(), 1, 1)
 	elseif Tail.WagTailCount == 25 or Tail.WagTailCount == 13 then
-		sounds:playSound("block.grass.step", player:getPos(), 0.5, 1)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grass.step"), player:getPos(), 0.5, 1)
 	end
 	Tail.WagTailCount = Tail.WagTailCount > 0 and Tail.WagTailCount - 1 or 0
 end)
