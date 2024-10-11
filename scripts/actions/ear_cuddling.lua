@@ -32,7 +32,7 @@ EarCuddling = General.instance({
             end
             local playerPos = player:getPos()
 			for _ = 1, 5 do
-				particles:newParticle("minecraft:end_rod", playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
 			end
         elseif self.AnimationCount == 132 then
             FaceParts.setEmotion("SURPLISED", "SURPLISED", "OPENED", 30, true)
@@ -49,7 +49,7 @@ EarCuddling = General.instance({
             FaceParts.setEmotion("TEAR", "TEAR", "NONE", 60, true)
             local playerPos = player:getPos()
             for _ = 1, 30 do
-				particles:newParticle("angry_villager", playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:angry_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 			end
         end
     end

@@ -38,7 +38,7 @@ VacuumCleaning = General.instance({
 			end
 			sounds:playSound("entity.minecart.riding", player:getPos(), 0.25, 2)
 			local exhaustParticlePivot = models.models.vacuum_cleaning.VeccumCleaner.ExhaustParticlePivot:partToWorldMatrix()
-			particles:newParticle("poof", exhaustParticlePivot[4][1], exhaustParticlePivot[4][2], exhaustParticlePivot[4][3]):scale(0.3)
+			particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), exhaustParticlePivot[4][1], exhaustParticlePivot[4][2], exhaustParticlePivot[4][3]):scale(0.3)
 		elseif self.AnimationCount == 148 then
 			models.models.vacuum_cleaning:setVisible(false)
 			sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)

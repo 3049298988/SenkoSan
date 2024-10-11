@@ -28,14 +28,14 @@ HairCut = General.instance({
 			if self.AnimationCount > 296 or self.AnimationCount <= 206 then
 				local playerPos = player:getPos()
 				for _ = 1, 5 do
-					particles:newParticle("end_rod", playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
+					particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
 				end
 			end
 			if self.AnimationCount <= 468 and self.AnimationCount >= 398 and (self.AnimationCount - 468) % 15 == 0 then
 				sounds:playSound("entity.cat.hiss", player:getPos(), 0.25, 2)
 				local splashPos = vectors.rotateAroundAxis(-(player:getBodyYaw() % 360), 0, 0, 0.3, 0, 1):add(player:getPos():add(0, 1))
 				for _ = 1, 5 do
-					particles:newParticle("splash", splashPos)
+					particles:newParticle(CompatibilityUtils:checkParticle("minecraft:splash"), splashPos)
 				end
 			elseif self.AnimationCount == 383 then
 				for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.HairCutRAB.Spray, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.HairCutLAB.Comb}) do
@@ -48,7 +48,7 @@ HairCut = General.instance({
 			elseif self.AnimationCount == 296 then
 				local playerPos = player:getPos()
 				for _ = 1, 30 do
-					particles:newParticle("smoke", playerPos:copy():add((math.random() - 0.5) * 2, (math.random() - 0.5) * 2 + 1, (math.random() - 0.5) * 2))
+					particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), playerPos:copy():add((math.random() - 0.5) * 2, (math.random() - 0.5) * 2 + 1, (math.random() - 0.5) * 2))
 				end
 				sounds:playSound("entity.sheep.shear", player:getPos(), 1, 1)
 				FaceParts.setEmotion("SURPLISED", "SURPLISED", "CLOSED", 60, false)
@@ -69,7 +69,7 @@ HairCut = General.instance({
 				local playerPos = player:getPos()
 				sounds:playSound("entity.player.levelup", playerPos, 1, 1.5)
 				for _ = 1, 30 do
-					particles:newParticle("happy_villager", playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
+					particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 				end
 			end
 		end

@@ -22,7 +22,7 @@ TailCuddling = General.instance({
 		if self.AnimationCount <= 270 and self.AnimationCount >= 20 then
 			local playerPos = player:getPos()
 			for _ = 1, 5 do
-				particles:newParticle("minecraft:end_rod", playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
 			end
 		end
 		if self.AnimationCount == 370 then
@@ -54,7 +54,7 @@ TailCuddling = General.instance({
 				local playerPos = player:getPos()
 				sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
 				for _ = 1, 30 do
-					particles:newParticle("minecraft:happy_villager", playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
+					particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 				end
 			elseif self.AnimationCount == 20 then
 				models.models.dummy_player:setVisible(false)

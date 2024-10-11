@@ -21,7 +21,7 @@ RefuseEmote = General.instance({
 		AnimationAction.onAnimationTick(self)
 		if self.AnimationCount % 5 == 0 then
 			for _ = 1, 4 do
-				particles:newParticle("splash", player:getPos():add(0, 2))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:splash"), player:getPos():add(0, 2))
 			end
 		end
 	end

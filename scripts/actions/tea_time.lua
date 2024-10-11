@@ -19,10 +19,10 @@ TeaTime = General.instance({
 	onAnimationTick = function (self)
 		AnimationAction.onAnimationTick(self)
 		local yunomi2ParticlePivot = models.models.tea.Table.TableItems.Yunomi2.Yunomi2ParticlePivot:partToWorldMatrix()
-		particles:newParticle("poof", yunomi2ParticlePivot[4][1], yunomi2ParticlePivot[4][2], yunomi2ParticlePivot[4][3]):scale(0.2):velocity(0, 0, 0):lifetime(15)
+		particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), yunomi2ParticlePivot[4][1], yunomi2ParticlePivot[4][2], yunomi2ParticlePivot[4][3]):scale(0.2):velocity(0, 0, 0):lifetime(15)
 		if self.AnimationCount > 50 then
 			local yunomi1ParticlePivot = models.models.main.Avatar.UpperBody.Body.Yunomi1.Yunomi1ParticlePivot:partToWorldMatrix()
-			particles:newParticle("poof", yunomi1ParticlePivot[4][1], yunomi1ParticlePivot[4][2], yunomi1ParticlePivot[4][3]):scale(0.2):velocity(0, 0, 0):lifetime(15)
+			particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), yunomi1ParticlePivot[4][1], yunomi1ParticlePivot[4][2], yunomi1ParticlePivot[4][3]):scale(0.2):velocity(0, 0, 0):lifetime(15)
 		end
 		if self.AnimationCount <= 210 and self.AnimationCount > 50 and (self.AnimationCount - 210) % 20 == 0 then
 			if self.AnimationCount == 210 then
@@ -36,7 +36,7 @@ TeaTime = General.instance({
 			sounds:playSound("entity.player.levelup", playerPos, 1, 1.5)
 			sounds:playSound("block.stone.break", player:getPos(), 0.5, 1)
 			for _ = 1, 30 do
-				particles:newParticle("happy_villager", playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 			end
 		end
 	end

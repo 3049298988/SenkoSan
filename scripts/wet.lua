@@ -43,7 +43,7 @@ events.TICK:register(function()
 	elseif Wet.WetCount > 0 then
 		if Wet.WetCount % 5 == 0 then
 			for _ = 1, math.min(avatar:getMaxParticles() / 4 , 4) * math.ceil(Wet.WetCount / 300) / 4 do
-				particles:newParticle("minecraft:falling_water", playerPos.x + math.random() - 0.5, playerPos.y + math.random() + 0.5, playerPos.z + math.random() - 0.5)
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:falling_water"), playerPos.x + math.random() - 0.5, playerPos.y + math.random() + 0.5, playerPos.z + math.random() - 0.5)
 			end
 		end
 		Ears.setEarsRot("DROOPING", 1, true)
