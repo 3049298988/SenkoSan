@@ -2,7 +2,7 @@
 ---@field ChairBlock BlockTask 椅子の代わりのオークの木の階段の描画を行うレンダータスク
 ---@field ScissorsItem ItemTask はさみの描画を行うレンダータスク
 HairCut = General.instance({
-	ChairBlock = models.models.hair_cut:newBlock("hair_cut.chair"):block("minecraft:oak_stairs"):pos(8, -6, -4):rot(0, 180), --椅子代わりの階段ブロックのレンダータスク
+	ChairBlock = models.models.hair_cut:newBlock("hair_cut.chair"):setBlock(CompatibilityUtils:checkBlock("minecraft:oak_stairs")):pos(8, -6, -4):rot(0, 180), --椅子代わりの階段ブロックのレンダータスク
 	ScissorsItem = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.HairCutRAB.Scissors:newItem("hair_cut.scissors"):setItem(CompatibilityUtils:checkItem("minecraft:shears")):pos(2, 0, -3):rot(-90, 45, 0):scale(0.5, 0.5, 0.5):setVisible(false), --鋏のアイテムレンダータスク。
 
 	---散髪アニメーションを再生する。
