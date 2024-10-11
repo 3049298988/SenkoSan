@@ -22,7 +22,7 @@ Kotatsu = General.instance({
 			---@diagnostic disable-next-line: undefined-field
 			SitDown:stop()
 		end
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		if host:isHost() and General.ShowMessage then
 			print(Language.getTranslate("action_wheel__main_1__action_7__start"))
 		end
@@ -37,7 +37,7 @@ Kotatsu = General.instance({
 	---こたつアニメーションを停止する。
 	stop = function (self)
 		PermanentAnimationAction.stop(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		if not Armor.ArmorVisible[3] then
 			if Costume.CurrentCostume == "MAID_A" then
 
@@ -59,9 +59,9 @@ Kotatsu = General.instance({
 	onAnimationTick = function (self)
 		PermanentAnimationAction.onAnimationTick(self)
 		if self.AnimationCount == 282 then
-			sounds:playSound("block.grass.step", player:getPos(), 1, 1)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grass.step"), player:getPos(), 1, 1)
 		elseif self.AnimationCount == 275 or self.AnimationCount == 287 then
-			sounds:playSound("block.grass.step", player:getPos(), 0.5, 1)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grass.step"), player:getPos(), 0.5, 1)
 		elseif self.AnimationCount == 300 then
 			self.AnimationCount = 1
 		end

@@ -20,17 +20,17 @@ FoxJump = General.instance({
 	onAnimationTick = function (self)
 		AnimationAction.onAnimationTick(self)
 		if self.AnimationCount == 98 then
-			sounds:playSound("entity.snowball.throw", player:getPos(), 1, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.snowball.throw"), player:getPos(), 1, 1.5)
 			FaceParts.setEmotion("UNEQUAL", "UNEQUAL", "OPENED", 11, true)
 		elseif self.AnimationCount == 87 or (self.AnimationCount <= 83 and self.AnimationCount >= 32 and (self.AnimationCount - 83) % 3 == 0) or self.AnimationCount == 18 then
-			sounds:playSound("block.snow.break", player:getPos(), 1, 1)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.snow.break"), player:getPos(), 1, 1)
 			for _ = 1, 5 do
-				particles:newParticle("block minecraft:snow_block", FoxJump.TargetPos)
+				particles:newParticle(CompatibilityUtils.getBlockParticleId(CompatibilityUtils:checkBlock("minecraft:snow")), FoxJump.TargetPos)
 			end
 			if self.AnimationCount == 87 then
 				FaceParts.setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 69, true)
 			elseif self.AnimationCount == 18 then
-				sounds:playSound("entity.snowball.throw", player:getPos(), 1, 1.5)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.snowball.throw"), player:getPos(), 1, 1.5)
 			end
 		elseif self.AnimationCount == 1 then
 			self:stop()
