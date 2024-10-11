@@ -6,7 +6,7 @@ Smile = General.instance({
 		EmotionAction.play(self)
 		if playSoundParticle then
 			local playerPos = player:getPos()
-			sounds:playSound("entity.player.levelup", playerPos, 1, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), playerPos, 1, 1.5)
 			for _ = 1, 30 do
 				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 			end

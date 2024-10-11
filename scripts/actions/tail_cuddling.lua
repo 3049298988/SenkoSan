@@ -3,14 +3,14 @@ TailCuddling = General.instance({
 	---尻尾モフモフアニメーションを再生する。
 	play = function (self)
 		AnimationAction.play(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		Physics.EnablePyhsics[1] = false
 	end,
 
 	---尻尾モフモフアニメーションを停止する。
 	stop = function (self)
 		if self.AnimationCount > 20 then
-			sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		end
 		AnimationAction.stop(self)
 		Physics.EnablePyhsics[1] = true
@@ -34,31 +34,31 @@ TailCuddling = General.instance({
 			FaceParts.setComplexion("BLUSH", 210, true)
 		elseif self.AnimationCount == 270 then
 			FaceParts.setEmotion("SURPLISED", "SURPLISED", "NONE", 90, true)
-			sounds:playSound("entity.experience_orb.pickup", player:getPos(), 0.25, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.experience_orb.pickup"), player:getPos(), 0.25, 1.5)
 		elseif self.AnimationCount <= 250 and self.AnimationCount >= 160 then
 			if (self.AnimationCount - 250) % 20 == 0 then
-				sounds:playSound("block.grass.step", player:getPos(), 0.5, 1)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grass.step"), player:getPos(), 0.5, 1)
 			end
 			if self.AnimationCount == 180 then
 				FaceParts.setEmotion("UNEQUAL", "UNEQUAL", "NONE", 20, true)
-				sounds:playSound("minecraft:entity.wolf.shake", player:getPos(), 1, 1.5)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.wolf.shake"), player:getPos(), 1, 1.5)
 			elseif self.AnimationCount == 160 then
 				FaceParts.setEmotion("CLOSED", "CLOSED", "NONE", 100, true)
 			end
 		elseif self.AnimationCount <= 130 and self.AnimationCount >= 20 then
 			if (self.AnimationCount - 130) % 10 == 0 then
-				sounds:playSound("block.grass.step", player:getPos(), 0.5, 1)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grass.step"), player:getPos(), 0.5, 1)
 			end
 			if self.AnimationCount == 60 then
 				FaceParts.setEmotion("CLOSED", "CLOSED", "OPENED", 40, true)
 				local playerPos = player:getPos()
-				sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), playerPos, 1, 1.5)
 				for _ = 1, 30 do
 					particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 				end
 			elseif self.AnimationCount == 20 then
 				models.models.dummy_player:setVisible(false)
-				sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 			end
 		end
 	end

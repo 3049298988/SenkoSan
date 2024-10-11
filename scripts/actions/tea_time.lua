@@ -3,7 +3,7 @@ TeaTime = General.instance({
 	---お茶飲みのアニメーションを再生する。
 	play = function (self)
 		AnimationAction.play(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		Arms.RightArmRotOffset = vectors.vec3(-20, -10, 15)
 		Arms.LeftArmRotOffset = vectors.vec3(-20, 10, -15)
 		Arms.hideHeldItem(true)
@@ -12,7 +12,7 @@ TeaTime = General.instance({
 	---お茶飲みのアニメーションを停止する。
 	stop = function (self)
 		AnimationAction.stop(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 	end,
 
 	---アニメーション再生中に毎チック実行される関数
@@ -28,13 +28,13 @@ TeaTime = General.instance({
 			if self.AnimationCount == 210 then
 				FaceParts.setEmotion("CLOSED", "CLOSED", "CLOSED", 160, true)
 			end
-			sounds:playSound("entity.generic.drink", player:getPos(), 0.5, 1)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.drink"), player:getPos(), 0.5, 1)
 		elseif self.AnimationCount == 50 then
 		elseif self.AnimationCount == 40 then
 			FaceParts.setEmotion("CLOSED", "CLOSED", "OPENED", 40, true)
 			local playerPos = player:getPos()
-			sounds:playSound("entity.player.levelup", playerPos, 1, 1.5)
-			sounds:playSound("block.stone.break", player:getPos(), 0.5, 1)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), playerPos, 1, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.stone.break"), player:getPos(), 0.5, 1)
 			for _ = 1, 30 do
 				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 			end

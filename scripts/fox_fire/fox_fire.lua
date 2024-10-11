@@ -111,7 +111,7 @@ FoxFire = {
                 table.remove(self.IsLit, 1)
             end
             if self.IsLit[2] ~= self.IsLit[1] and self.Phase == "NORMAL" then
-                sounds:playSound(CompatibilityUtils:checkParticle(self.IsLit[2] and "minecraft:item.firecharge.use" or "minecraft:block.fire.extinguish"), self.FoxFireModel:getPos():scale(0.0625), 0.25, 2)
+                sounds:playSound(CompatibilityUtils:checkSound(self.IsLit[2] and "minecraft:item.firecharge.use" or "minecraft:block.fire.extinguish"), self.FoxFireModel:getPos():scale(0.0625), 0.25, 2)
             end
             if self.ModelScale > 0 then
                 self.IsAboveSoudBlock = false
@@ -146,10 +146,10 @@ FoxFire = {
                     self.AmbientSoundCount = self.AmbientSoundCount - 1
                     if self.AmbientSoundCount == 0 then
                         if self.IsAboveSoudBlock then
-                            sounds:playSound("minecraft:item.firecharge.use", self.CurrentPos:copy():scale(0.0625), 0.02, 0.5)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.firecharge.use"), self.CurrentPos:copy():scale(0.0625), 0.02, 0.5)
                             self.AmbientSoundCount = math.random(20, 40)
                         else
-                            sounds:playSound("minecraft:block.fire.ambient", self.CurrentPos:copy():scale(0.0625), 0.1, 1)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.fire.ambient"), self.CurrentPos:copy():scale(0.0625), 0.1, 1)
                             self.AmbientSoundCount = math.random(51, 100)
                         end
                     end

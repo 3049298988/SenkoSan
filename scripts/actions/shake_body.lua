@@ -8,7 +8,7 @@ ShakeBody = General.instance({
 	play = function (self, snowParticle)
 		AnimationAction.play(self)
 		Umbrella.Enabled = true
-		sounds:playSound("entity.wolf.shake", player:getPos(), 1, 1.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.wolf.shake"), player:getPos(), 1, 1.5)
 		FaceParts.setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 20, true)
 		ShakeBody.SnowParticle = snowParticle
 	end,

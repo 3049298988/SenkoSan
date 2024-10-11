@@ -18,7 +18,7 @@ Wet = {
 
 --ping関数
 function pings.wetJumpSound()
-	sounds:playSound("minecraft:entity.cod.flop", player:getPos(), Wet.WetCount / 1200, 1)
+	sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.cod.flop"), player:getPos(), Wet.WetCount / 1200, 1)
 end
 
 events.TICK:register(function()
@@ -30,7 +30,7 @@ events.TICK:register(function()
 		Wet.WalkDistance = Wet.WalkDistance + math.sqrt(math.abs(velocity.x ^ 2 + velocity.z ^ 2))
 		if Wet.WalkDistance >= 1.8 then
 			if not player:getVehicle() and onGround and not player:isInWater() then
-				sounds:playSound("minecraft:entity.cod.flop", playerPos, Wet.WetCount / 1200, 1)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.cod.flop"), playerPos, Wet.WetCount / 1200, 1)
 			end
 			Wet.WalkDistance = 0
 		end
