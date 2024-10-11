@@ -3,7 +3,7 @@ Earpick = General.instance({
 	---耳かきアニメーションを再生する。
 	play = function (self)
 		AnimationAction.play(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		Arms.RightArmRotOffset = vectors.vec3(-20, -10, 15)
 		Arms.LeftArmRotOffset = vectors.vec3(-20, 10, -15)
 		Arms.hideHeldItem(true)
@@ -12,7 +12,7 @@ Earpick = General.instance({
 	---耳かきアニメーションを停止する。
 	stop = function (self)
 		AnimationAction.stop(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 	end,
 
 	---アニメーション再生中に毎チック実行される関数
@@ -20,15 +20,15 @@ Earpick = General.instance({
 		AnimationAction.onAnimationTick(self)
 		local playerPos = player:getPos()
 		for _ = 1, 5 do
-			particles:newParticle("end_rod", playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
+			particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), playerPos:copy():add((math.random() - 0.5) * 10, (math.random() - 0.5) * 10, (math.random() - 0.5) * 10))
 		end
 		if self.AnimationCount == 184 then
 			FaceParts.setEmotion("CLOSED", "CLOSED", "CLOSED", 40, true)
 		elseif self.AnimationCount == 41 then
 			FaceParts.setEmotion("CLOSED", "CLOSED", "OPENED", 40, true)
-			sounds:playSound("entity.player.levelup", playerPos, 1, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), playerPos, 1, 1.5)
 			for _ = 1, 30 do
-				particles:newParticle("happy_villager", playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 			end
 		end
 	end

@@ -20,7 +20,7 @@ events.TICK:register(function ()
 	Umbrella.IsUsing = (((player:isInRain() or Umbrella.AlwaysUse) and not player:getHeldItem().id:find("^minecraft:.+_sword$") and player:getHeldItem(true).id == "minecraft:air" and (mainHeldItem.id ~= "minecraft:crossbow" or mainHeldItem.tag["Charged"] == 0)) or PhotoPose.CurrentPose == 7) and not player:isUnderwater() and activeItem.id ~= "minecraft:bow" and activeItem.id ~= "minecraft:crossbow" and not player:getVehicle() and playerPose ~= "FALL_FLYING" and playerPose ~= "SWIMMING" and Umbrella.Enabled
 	if Umbrella.IsUsing then
 		if not Umbrella.IsUsingPrev and Umbrella.Sound then
-			sounds:playSound("minecraft:entity.bat.takeoff", player:getPos(), 0.5, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.bat.takeoff"), player:getPos(), 0.5, 1.5)
 		end
 		if PhotoPose.CurrentPose == 0 and Naginata.State[1] <= 1 and Naginata.State[2] <= 1 then
 			if leftHanded then
@@ -36,7 +36,7 @@ events.TICK:register(function ()
 		models.models.main.Avatar.UpperBody.Body.UmbrellaB:setVisible(true)
 	else
 		if Umbrella.IsUsingPrev and Umbrella.Sound then
-			sounds:playSound("minecraft:entity.bat.takeoff", player:getPos(), 0.5, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.bat.takeoff"), player:getPos(), 0.5, 1.5)
 			if PhotoPose.CurrentPose == 0 and Naginata.State[1] <= 1 and Naginata.State[2] <= 1 then
 				Arms.RightArmRotOffset = vectors.vec3()
 				Arms.LeftArmRotOffset = vectors.vec3()

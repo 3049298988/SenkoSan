@@ -33,7 +33,7 @@ FoxFireManager = {
             for i, _ in ipairs(models.models.main.FoxFireAnchors:getChildren()) do
                 table.insert(self.FoxFireInstances, self.FoxFire.new(i))
             end
-            sounds:playSound("minecraft:item.firecharge.use", player:getPos(), 1, 2)
+            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.firecharge.use"), player:getPos(), 1, 2)
             events.TICK:register(function ()
                 if not client:isPaused() then
                     for index, foxFireInstance in ipairs(self.FoxFireInstances) do
@@ -68,7 +68,7 @@ FoxFireManager = {
             for _, foxFireInstance in ipairs(self.FoxFireInstances) do
                 foxFireInstance:onDeinit()
             end
-            sounds:playSound("minecraft:block.fire.extinguish", player:getPos(), 1, 2)
+            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.fire.extinguish"), player:getPos(), 1, 2)
         end
         self.Enabled = enabled
     end,

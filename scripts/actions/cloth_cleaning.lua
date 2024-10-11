@@ -3,7 +3,7 @@ ClothCleaning = General.instance({
 	---雑巾がけアニメーションを再生する。
 	play = function (self)
 		AnimationAction.play(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		Sleeve.Moving = false
 		Arms.hideHeldItem(true)
 	end,
@@ -11,7 +11,7 @@ ClothCleaning = General.instance({
 	---雑巾がけアニメーションを停止する。
 	stop = function (self)
 		AnimationAction.stop(self)
-		sounds:playSound("entity.item.pickup", player:getPos(), 1, 0.5)
+		sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 		Sleeve.Moving = true
 	end,
 
@@ -23,9 +23,9 @@ ClothCleaning = General.instance({
 		elseif self.AnimationCount == 40 then
 			FaceParts.setEmotion("CLOSED", "CLOSED", "OPENED", 40, true)
 			local playerPos = player:getPos()
-			sounds:playSound("entity.player.levelup", playerPos, 1, 1.5)
+			sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), playerPos, 1, 1.5)
 			for _ = 1, 30 do
-				particles:newParticle("happy_villager", playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:happy_villager"), playerPos:copy():add((math.random() - 0.5) * 4, (math.random() - 0.5) * 4 + 1, (math.random() - 0.5) * 4))
 			end
 		end
 	end

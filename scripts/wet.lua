@@ -18,7 +18,7 @@ Wet = {
 
 --ping関数
 function pings.wetJumpSound()
-	sounds:playSound("minecraft:entity.cod.flop", player:getPos(), Wet.WetCount / 1200, 1)
+	sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.cod.flop"), player:getPos(), Wet.WetCount / 1200, 1)
 end
 
 events.TICK:register(function()
@@ -30,7 +30,7 @@ events.TICK:register(function()
 		Wet.WalkDistance = Wet.WalkDistance + math.sqrt(math.abs(velocity.x ^ 2 + velocity.z ^ 2))
 		if Wet.WalkDistance >= 1.8 then
 			if not player:getVehicle() and onGround and not player:isInWater() then
-				sounds:playSound("minecraft:entity.cod.flop", playerPos, Wet.WetCount / 1200, 1)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.cod.flop"), playerPos, Wet.WetCount / 1200, 1)
 			end
 			Wet.WalkDistance = 0
 		end
@@ -43,7 +43,7 @@ events.TICK:register(function()
 	elseif Wet.WetCount > 0 then
 		if Wet.WetCount % 5 == 0 then
 			for _ = 1, math.min(avatar:getMaxParticles() / 4 , 4) * math.ceil(Wet.WetCount / 300) / 4 do
-				particles:newParticle("minecraft:falling_water", playerPos.x + math.random() - 0.5, playerPos.y + math.random() + 0.5, playerPos.z + math.random() - 0.5)
+				particles:newParticle(CompatibilityUtils:checkParticle("minecraft:falling_water"), playerPos.x + math.random() - 0.5, playerPos.y + math.random() + 0.5, playerPos.z + math.random() - 0.5)
 			end
 		end
 		Ears.setEarsRot("DROOPING", 1, true)
