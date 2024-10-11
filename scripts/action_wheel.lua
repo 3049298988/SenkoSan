@@ -291,7 +291,7 @@ events.TICK:register(function ()
 			if ActionWheel.SkullState ~= ActionWheel.CurrentSkullState then
 				pings.main4_action3(ActionWheel.SkullState)
 				Config.saveConfig("skull", ActionWheel.SkullState)
-				sounds:playSound(CompatibilityUtils:checkSound("minecrarft:entity.item.pickup"), player:getPos(), 1, 0.5)
+				sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
 				print(Language.getTranslate("action_wheel__main_4__action_3__done_first")..Language.getTranslate("skull__"..Skull.SkullList[ActionWheel.SkullState])..Language.getTranslate("action_wheel__main_4__action_3__done_last"))
 			end
 		end
