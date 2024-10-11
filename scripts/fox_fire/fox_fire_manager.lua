@@ -2,7 +2,7 @@
 FoxFireManager = {
     ---狐火のインスタンスを生成するクラス
     ---@type FoxFire
-    FoxFire = require("scripts.for_fire.fox_fire"),
+    FoxFire = require("scripts.fox_fire.fox_fire"),
 
     ---狐火のインスタンスを保持するテーブル
     ---@type table[]
