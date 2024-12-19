@@ -341,7 +341,7 @@ Costume = {
 			modelPart:setVisible(false)
 		end
 		models.models.main.Avatar.Head.Ears:setVisible(not Armor.ArmorVisible[1])
-		models.models.main.Avatar.Head.Ears.LeftEarPivot:setVisible()
+		models.models.main.Avatar.Head.Ears.LeftEarPivot:setVisible(true)
 		for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Apron, models.models.main.Avatar.UpperBody.Body.UmbrellaB}) do
 			modelPart:setUVPixels()
 		end
@@ -369,7 +369,7 @@ Costume = {
 		if armorIndex == 1 then
 			if Armor.ArmorVisible[1] then
 				models.models.main.Avatar.Head.Ears:setVisible(player:getItem(6).id == "minecraft:chainmail_helmet")
-				models.models.main.Avatar.Head.Ears.LeftEarPivot:setVisible()
+				models.models.main.Avatar.Head.Ears.LeftEarPivot:setVisible(true)
 				for _, modelPart in ipairs({models.models.main.Avatar.Head.CDisguiseH, models.models.main.Avatar.Head.CMaidBrimH, models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.Head.CFoxMaskH, models.models.main.Avatar.Head.CKnitH, models.models.main.Avatar.Head.CFoxHoodH, models.models.main.Avatar.Head.CBeretH, models.models.main.Avatar.Head.CSantaH, models.models.main.Avatar.Head.CHalloweenH}) do
 					modelPart:setVisible(false)
 				end
