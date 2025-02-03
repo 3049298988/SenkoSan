@@ -289,8 +289,8 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 
 1. Install the mod loader which you want to use and make the mods available.
 2. Install [Figura](https://modrinth.com/mod/figura). Note the mod dependencies.
-3. Go to the [release page](https://github.com/Gakuto1112/SenkoSan/releases).
-   - You can also go there from the right side of [the repository's home page](https://github.com/Gakuto1112/SenkoSan).
+3. Go to the [release page](https://github.com/3049298988/SenkoSan/releases).
+   - You can also go there from the right side of [the repository's home page](https://github.com/3049298988/SenkoSan).
 4. Download the avatar of your choice that attached to "Assets" section of the release notes.
 5. Unzip the zipped file and take the avatar data inside this.
 6. Put avatar files at `<minecraft_instance_directory>/figura/avatars/`.
@@ -304,8 +304,8 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 ## Notes
 - I'm not responsible for any damages caused by using this avatar.
 - This avatar is designed for work with no resource pack and no other mods are installed. An unexpected issue may occurs when you use it with any resource packs and mods (texture and armor inconsistencies, etc.). However, I may not support you in these cases.
-- Please [report an issue](https://github.com/Gakuto1112/SenkoSan/issues) if you find it.
-- Please contact me via [Discussions](https://github.com/Gakuto1112/SenkoSan/discussions) or [Discord](https://discord.com/) if you want to do for my avatars. My Discord name is "vinny_san" and display name is "ばにーさん". My display name in [Figura Discord server](https://discord.gg/figuramc) is "BunnySan/ばにーさん".
+- Please [report an issue](https://github.com/3049298988/SenkoSan/issues) if you find it.
+- Please contact me via [Discussions](https://github.com/3049298988/SenkoSan/discussions) or [Discord](https://discord.com/) if you want to do for my avatars. My Discord name is "vinny_san" and display name is "ばにーさん". My display name in [Figura Discord server](https://discord.gg/figuramc) is "BunnySan/ばにーさん".
 
 ## Links
 - [Figura（Modrinth）](https://modrinth.com/mod/figura)
