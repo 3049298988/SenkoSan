@@ -7,6 +7,7 @@ on:
     paths:
       - .github/README_templates/**
       - .github/workflows/generate_readme.yml
+  workflow_dispatch:
 
 jobs:
   generate-readme:
