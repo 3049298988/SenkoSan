@@ -4,6 +4,7 @@ on:
   repository_dispatch:
     types:
       - dispatch_readme
+  workflow_dispatch:
 
 jobs:
   get_target_branches:
